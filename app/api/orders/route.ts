@@ -1,98 +1,111 @@
-import { NextResponse } from "next/server";
-import connect from "@/lib/mongodb";
-import Order from "@/lib/models/order";
+import { NextRequest, NextResponse } from 'next/server';
+import connect from '@/lib/mongodb';
+import { Order, User } from '@/lib/db-models';
+import crypto from 'crypto';
 
-export async function GET(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
+export async function POST(req: NextRequest) {
+  try {
+    await connect();
+    const body = await req.json();
+    const {
+      userId,
+      items,
+      deliveryAddress,
+      paymentMethod,
+      scheduledFor,
+      notes
+    } = body;
 
-  if (authHeader !== adminSecret) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!userId || !items || !deliveryAddress) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Calculate totals
+    const subtotal = items.reduce((sum: number, item: any) => sum + item.subtotal, 0);
+    const taxes = Math.round(subtotal * 0.17); // 17% GST for Pakistan
+    const deliveryFee = subtotal > 5000 ? 0 : 200; // Free delivery over 5000 PKR
+    const totalAmount = subtotal + taxes + deliveryFee;
+
+    // Generate unique order ID
+    const orderId = `ORD-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
+
+    const order = new Order({
+      orderId,
+      userId,
+      items,
+      deliveryAddress,
+      subtotal,
+      taxes,
+      deliveryFee,
+      totalAmount,
+      paymentMethod,
+      paymentStatus: 'pending',
+      orderStatus: 'pending',
+      scheduledFor,
+      notes,
+      trackingUpdates: [
+        {
+          status: 'pending',
+          timestamp: new Date(),
+          message: 'Order received. Awaiting confirmation.'
+        }
+      ]
+    });
+
+    await order.save();
+
+    // Update user order count and total spent
+    await User.findByIdAndUpdate(userId, {
+      $inc: {
+        orderCount: 1,
+        totalSpent: totalAmount
+      }
+    });
+
+    return NextResponse.json({
+      success: true,
+      order: {
+        orderId: order.orderId,
+        totalAmount: order.totalAmount,
+        status: order.orderStatus,
+        estimatedDeliveryTime: new Date(Date.now() + 35 * 60 * 1000) // 35 mins
+      }
+    });
+  } catch (error) {
+    console.error('Order creation error:', error);
+    return NextResponse.json(
+      { error: 'Failed to create order' },
+      { status: 500 }
+    );
   }
-
-  await connect();
-
-  const { searchParams } = new URL(request.url);
-  const status = searchParams.get("status");
-
-  const filter = status ? { status } : {};
-  const orders = await Order.find(filter).sort({ orderedAt: -1 }).lean();
-
-  return NextResponse.json({ orders });
 }
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const { customerName, customerPhone, items, totalPrice, deliveryType, deliveryAddress, notes } = body;
+export async function GET(req: NextRequest) {
+  try {
+    await connect();
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get('userId');
 
-  if (!customerName || !customerPhone || !items || !totalPrice) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'User ID required' },
+        { status: 400 }
+      );
+    }
+
+    const orders = await Order.find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(50);
+
+    return NextResponse.json({ success: true, orders });
+  } catch (error) {
+    console.error('Get orders error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch orders' },
+      { status: 500 }
+    );
   }
-
-  await connect();
-
-  const order = await Order.create({
-    customerName,
-    customerPhone,
-    items,
-    totalPrice,
-    deliveryType: deliveryType || "pickup",
-    deliveryAddress,
-    notes,
-    status: "pending",
-    orderedAt: new Date()
-  });
-
-  return NextResponse.json({ order }, { status: 201 });
-}
-
-export async function PUT(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const { id, status } = await request.json();
-
-  if (!id || !status) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
-  await connect();
-
-  const updateData: any = { status };
-  if (status === "completed") {
-    updateData.completedAt = new Date();
-  }
-
-  const order = await Order.findByIdAndUpdate(id, updateData, { new: true });
-
-  if (!order) {
-    return NextResponse.json({ error: "Order not found" }, { status: 404 });
-  }
-
-  return NextResponse.json({ order });
-}
-
-export async function DELETE(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const { id } = await request.json();
-
-  await connect();
-
-  const order = await Order.findByIdAndDelete(id);
-
-  if (!order) {
-    return NextResponse.json({ error: "Order not found" }, { status: 404 });
-  }
-
-  return NextResponse.json({ success: true });
 }
