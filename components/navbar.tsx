@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, Moon, Phone, Search, Sun, Truck } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import DarkModeToggle from "@/components/dark-mode-toggle";
 import { cn } from "@/lib/utils";
@@ -42,9 +43,15 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-3 font-heading text-xl font-semibold tracking-[0.3em] text-ink uppercase">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold text-[0.9rem] text-surface">
-            B
-          </span>
+          <div className="relative h-10 w-10 flex-shrink-0">
+            <Image
+              src="/icon.svg"
+              alt="Brew4You Logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
+            />
+          </div>
           Brew4You
         </Link>
 

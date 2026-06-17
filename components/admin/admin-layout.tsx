@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, LogOut, BarChart3, Coffee, FileText, Settings as SettingsIcon, Package } from "lucide-react";
 
@@ -70,7 +71,27 @@ export default function AdminLayout({ children, currentPage }: AdminLayoutProps)
       >
         {/* Logo */}
         <div className="flex items-center justify-between border-b border-gold/20 px-4 py-6">
-          {sidebarOpen && <h1 className="text-xl font-bold text-gold">BREW4YOU</h1>}
+          {sidebarOpen && (
+            <div className="flex items-center gap-2">
+              <Image
+                src="/icon.svg"
+                alt="Brew4You Logo"
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
+              <h1 className="text-xl font-bold text-gold">BREW4YOU</h1>
+            </div>
+          )}
+          {!sidebarOpen && (
+            <Image
+              src="/icon.svg"
+              alt="Brew4You Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain"
+            />
+          )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="rounded-lg p-2 hover:bg-gold/10 transition-colors"
