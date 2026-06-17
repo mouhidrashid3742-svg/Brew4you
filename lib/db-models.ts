@@ -70,6 +70,8 @@ const userSchema = new mongoose.Schema<IUser>(
 export interface IOrder extends mongoose.Document {
   orderId: string;
   userId: mongoose.Types.ObjectId;
+  customerName: string;
+  customerPhone: string;
   items: {
     itemId: string;
     name: string;
@@ -109,6 +111,8 @@ const orderSchema = new mongoose.Schema<IOrder>(
   {
     orderId: { type: String, required: true, unique: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    customerName: { type: String, required: true },
+    customerPhone: { type: String, required: true },
     items: [
       {
         itemId: String,

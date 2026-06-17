@@ -35,8 +35,10 @@ interface Cart {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const [step, setStep] = useState<"address" | "review" | "confirmation">("address");
+  const [step, setStep] = useState<"phone" | "address" | "review" | "confirmation">("phone");
   const [userId, setUserId] = useState<string>("");
+  const [userPhone, setUserPhone] = useState("");
+  const [userName, setUserName] = useState("");
   const [cart, setCart] = useState<Cart | null>(null);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
@@ -54,11 +56,15 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     const id = localStorage.getItem("userId");
+    const phone = localStorage.getItem("userPhone");
+    const name = localStorage.getItem("userName");
     if (!id) {
       router.push("/auth/login");
       return;
     }
     setUserId(id);
+    setUserPhone(phone || "");
+    setUserName(name || "");
     loadData(id);
   }, [router]);
 
@@ -143,7 +149,9 @@ export default function CheckoutPage() {
           },
           paymentMethod,
           scheduledFor,
-          notes
+          notes,
+          customerPhone: userPhone,
+          customerName: userName
         })
       });
 
@@ -152,6 +160,21 @@ export default function CheckoutPage() {
         setOrderId(data.order.orderId);
         setStep("confirmation");
         toast.success("Order placed successfully!");
+        
+        // Send notifications to admin (WhatsApp + Email)
+        await fetch("/api/notifications/order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderId: data.order.orderId,
+            customerName: userName,
+            customerPhone: userPhone,
+            items: cart.items,
+            totalAmount: cart.totalAmount,
+            deliveryAddress: address,
+            notes
+          })
+        }).catch(err => console.log("Notification sent (may be in background)"));
         
         // Clear cart
         await fetch(`/api/cart?userId=${userId}`, { method: "DELETE" });
@@ -314,6 +337,62 @@ export default function CheckoutPage() {
     <main className="min-h-screen bg-surface pt-24 pb-20">
       <div className="mx-auto max-w-2xl px-6 py-8">
         <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+
+        {/* Phone Confirmation Step */}
+        {step === "phone" && (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-bold mb-4">Confirm Your Phone Number</h2>
+              <p className="text-ink/70 mb-6">We'll send order updates to this number and use it to contact you about your delivery.</p>
+
+              <div className="glass-card rounded-2xl p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={userPhone}
+                    onChange={(e) => setUserPhone(e.target.value)}
+                    placeholder="+923001234567"
+                    className="w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-ink outline-none focus:border-gold/50"
+                  />
+                  <p className="text-xs text-ink/60 mt-2">Format: +923XX or 03XX</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Name</label>
+                  <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    placeholder="Your full name"
+                    className="w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-ink outline-none focus:border-gold/50"
+                  />
+                </div>
+
+                <div className="bg-gold/10 border border-gold/20 rounded-lg p-4">
+                  <p className="text-xs text-ink/70">
+                    <span className="font-bold text-gold">📞 Important:</span> Make sure this is your active phone number. We'll use it for delivery updates and calling you if needed.
+                  </p>
+                </div>
+
+                <Button
+                  onClick={() => {
+                    if (!userPhone || !userName) {
+                      toast.error("Please fill in all fields");
+                      return;
+                    }
+                    localStorage.setItem("userPhone", userPhone);
+                    localStorage.setItem("userName", userName);
+                    setStep("address");
+                  }}
+                  className="w-full bg-gold hover:bg-gold/90 text-surface font-semibold h-12"
+                >
+                  Continue to Address
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Address Step */}
         {step === "address" && (
