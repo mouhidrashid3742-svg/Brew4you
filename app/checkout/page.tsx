@@ -194,33 +194,116 @@ export default function CheckoutPage() {
   if (step === "confirmation" && orderId) {
     return (
       <main className="min-h-screen bg-surface pt-24 pb-20">
-        <div className="mx-auto max-w-2xl px-6 py-8 text-center">
-          <div className="mb-6">
+        <div className="mx-auto max-w-2xl px-6 py-8">
+          <div className="text-center mb-8">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gold/20 mb-4">
               <span className="text-3xl">✓</span>
             </div>
-          </div>
-          <h1 className="text-3xl font-bold mb-2">Order Placed!</h1>
-          <p className="text-ink/70 mb-6">Your coffee will arrive in ~35 minutes</p>
-          
-          <div className="glass-card rounded-2xl p-6 mb-6 text-left">
-            <p className="text-sm text-ink/60 mb-2">Order ID</p>
-            <p className="font-mono text-lg font-bold text-gold mb-4">{orderId}</p>
-            <p className="text-sm text-ink/60 mb-1">Total Amount</p>
-            <p className="text-2xl font-bold text-gold">PKR {cart.totalAmount}</p>
+            <h1 className="text-3xl font-bold mb-2">Order Placed Successfully!</h1>
+            <p className="text-ink/70">Your coffee will arrive in ~35 minutes</p>
           </div>
 
+          {/* Bill/Invoice */}
+          <div className="glass-card rounded-2xl p-6 mb-8 border border-gold/20">
+            <div className="mb-6 pb-6 border-b border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold">ORDER RECEIPT</h2>
+                <span className="text-xs bg-gold/20 text-gold px-3 py-1 rounded-full font-semibold">CONFIRMED</span>
+              </div>
+              <p className="text-sm text-ink/60">Order ID: <span className="font-mono text-gold font-bold">{orderId}</span></p>
+              <p className="text-sm text-ink/60 mt-1">Date: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</p>
+            </div>
+
+            {/* Items */}
+            <div className="mb-6 pb-6 border-b border-white/10">
+              <h3 className="font-bold mb-4">Order Items</h3>
+              <div className="space-y-3">
+                {cart.items.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between text-sm">
+                    <div className="flex-1">
+                      <p className="font-semibold">{item.name}</p>
+                      {Object.keys(item.customizations).length > 0 && (
+                        <p className="text-xs text-ink/60 mt-1">
+                          {Object.entries(item.customizations)
+                            .map(([key, val]) => `${key}: ${val}`)
+                            .join(" • ")}
+                        </p>
+                      )}
+                    </div>
+                    <div className="text-right ml-4">
+                      <p className="text-xs text-ink/60">x{item.quantity}</p>
+                      <p className="font-bold text-gold">PKR {item.subtotal}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Breakdown */}
+            <div className="mb-6 pb-6 border-b border-white/10 space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-ink/70">Subtotal</span>
+                <span className="font-semibold">PKR {cart.subtotal}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-ink/70">Tax (17% GST)</span>
+                <span className="font-semibold">PKR {cart.taxes}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-ink/70">Delivery Fee</span>
+                <span className="font-semibold">
+                  {cart.deliveryFee === 0 ? (
+                    <span className="text-gold">FREE</span>
+                  ) : (
+                    `PKR ${cart.deliveryFee}`
+                  )}
+                </span>
+              </div>
+            </div>
+
+            {/* Total */}
+            <div className="bg-gold/10 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-lg">TOTAL AMOUNT</span>
+                <span className="text-2xl font-bold text-gold">PKR {cart.totalAmount}</span>
+              </div>
+              <p className="text-xs text-ink/60 mt-2">Payment Method: Cash on Delivery</p>
+            </div>
+          </div>
+
+          {/* Actions */}
           <div className="space-y-3">
             <Link href={`/orders/${orderId}`} className="block">
-              <Button className="w-full bg-gold hover:bg-gold/90 text-surface">
-                Track Order
+              <Button className="w-full bg-gold hover:bg-gold/90 text-surface font-semibold h-12">
+                Track Order in Real-Time
+              </Button>
+            </Link>
+            <Link href="/menu" className="block">
+              <Button variant="outline" className="w-full">
+                Order More
               </Button>
             </Link>
             <Link href="/" className="block">
-              <Button variant="outline" className="w-full">
+              <Button variant="ghost" className="w-full">
                 Back to Home
               </Button>
             </Link>
+          </div>
+
+          {/* Share to WhatsApp */}
+          <div className="mt-8 p-4 bg-white/5 rounded-lg text-center">
+            <p className="text-sm text-ink/70 mb-3">Share your order with WhatsApp</p>
+            <a
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000"}?text=${encodeURIComponent(`Hey Brew4You! I just placed order #${orderId} for PKR ${cart.totalAmount}. Order ID: ${orderId}`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA58] text-white px-6 py-2 rounded-lg font-semibold transition"
+            >
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2.05 22l6.03-1.58C10.25 21.59 11.12 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-.89 0-1.76-.19-2.6-.55l-.18-.09-1.9.5.51-1.87-.1-.18C4.03 16.3 3 14.24 3 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm3.89-8.66c-.2-.1-1.19-.59-1.38-.65-.18-.07-.32-.11-.46.11-.13.22-.52.65-.63.78-.12.13-.23.15-.43.04-.2-.1-.84-.31-1.6-.99-.59-.52-.99-1.17-1.1-1.37-.12-.2-.01-.31.08-.41.08-.08.18-.21.27-.31.09-.11.12-.18.18-.3.07-.13.03-.24-.03-.34-.07-.1-.46-1.11-.63-1.52-.17-.41-.33-.35-.46-.36-.12-.01-.26-.02-.39-.02-.14 0-.36.05-.55.25-.19.2-.72.7-.72 1.71 0 1.01.74 1.98.84 2.12.1.14 1.4 2.14 3.4 2.99.47.2.84.32 1.13.41.47.15.9.13 1.24.08.38-.06 1.18-.48 1.35-.95.16-.47.16-.87.11-.95-.04-.09-.16-.14-.33-.23z" />
+              </svg>
+              Share Receipt
+            </a>
           </div>
         </div>
       </main>

@@ -167,19 +167,66 @@ export default function OrderTrackingPage() {
         )}
 
         {/* Order Summary */}
-        <div className="glass-card rounded-2xl p-6 mb-8">
-          <h2 className="font-bold mb-4">Order Summary</h2>
-          <div className="space-y-2 mb-4">
-            {order.items.map((item, idx) => (
-              <div key={idx} className="flex justify-between">
-                <span>{item.name} x{item.quantity}</span>
-                <span className="font-semibold">PKR {item.subtotal}</span>
-              </div>
-            ))}
+        <div className="glass-card rounded-2xl p-6 mb-8 border border-gold/20">
+          <div className="mb-6 pb-6 border-b border-white/10">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold">ORDER RECEIPT</h2>
+              <span className={`text-xs px-3 py-1 rounded-full font-semibold capitalize ${
+                order.status === "delivered" 
+                  ? "bg-green-500/20 text-green-500"
+                  : order.status === "pending"
+                  ? "bg-yellow-500/20 text-yellow-500"
+                  : "bg-blue-500/20 text-blue-500"
+              }`}>
+                {order.status.split("_").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")}
+              </span>
+            </div>
+            <p className="text-sm text-ink/60 mt-3">Order ID: <span className="font-mono text-gold font-bold">{order.orderId}</span></p>
           </div>
-          <div className="border-t border-white/10 pt-4 flex justify-between text-lg font-bold">
-            <span>Total</span>
-            <span className="text-gold">PKR {order.totalAmount}</span>
+
+          {/* Items */}
+          <div className="mb-6 pb-6 border-b border-white/10">
+            <h3 className="font-bold mb-4">Order Items</h3>
+            <div className="space-y-3">
+              {order.items.map((item, idx) => (
+                <div key={idx} className="flex items-center justify-between text-sm">
+                  <div className="flex-1">
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-xs text-ink/60 mt-1">Qty: {item.quantity}</p>
+                  </div>
+                  <div className="text-right ml-4">
+                    <p className="font-bold text-gold">PKR {item.subtotal}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Price Breakdown */}
+          <div className="space-y-2 mb-6 pb-6 border-b border-white/10">
+            <div className="flex justify-between text-sm">
+              <span className="text-ink/70">Subtotal</span>
+              <span className="font-semibold">PKR {order.items.reduce((sum, i) => sum + i.subtotal, 0)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-ink/70">Tax (17% GST)</span>
+              <span className="font-semibold">PKR {Math.round(order.items.reduce((sum, i) => sum + i.subtotal, 0) * 0.17)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-ink/70">Delivery Fee</span>
+              <span className="font-semibold">
+                {order.totalAmount < 5000 ? `PKR 200` : `FREE`}
+              </span>
+            </div>
+          </div>
+
+          {/* Total */}
+          <div className="bg-gold/10 rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-lg">TOTAL AMOUNT</span>
+              <span className="text-2xl font-bold text-gold">PKR {order.totalAmount}</span>
+            </div>
+            <p className="text-xs text-ink/60 mt-2">Payment Method: Cash on Delivery</p>
           </div>
         </div>
 
