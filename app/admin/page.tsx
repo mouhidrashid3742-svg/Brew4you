@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
           <div className="bg-[#111111] border border-white/10 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-white">Recent Products</h2>
-              <Button variant="secondary" size="sm">
+              <Button variant="secondary">
                 View All →
               </Button>
             </div>

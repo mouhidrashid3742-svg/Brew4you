@@ -8,7 +8,7 @@ import { X, Plus, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { getAuthHeaders } from "@/lib/auth";
 
-interface MenuItem {
+export interface MenuItem {
   _id?: string;
   name: string;
   category: string;

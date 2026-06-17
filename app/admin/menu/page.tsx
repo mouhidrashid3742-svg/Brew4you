@@ -3,23 +3,14 @@
 import { useEffect, useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { MenuItemForm } from "@/components/admin/menu-item-form";
+import type { MenuItem } from "@/components/admin/menu-item-form";
 import { Button } from "@/components/ui/button";
 import { Edit, Trash2, Plus, Search } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { getAuthHeaders } from "@/lib/auth";
 
-interface MenuItem {
-  _id: string;
-  name: string;
-  category: string;
-  price: number;
-  description: string;
-  image: string;
-  popular: boolean;
-  available: boolean;
-  intensity: number;
-}
+
 
 export default function MenuManagementPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -258,7 +249,7 @@ export default function MenuManagementPage() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
-                          setEditingId(item._id);
+                          setEditingId(item._id ?? null);
                           setShowForm(true);
                         }}
                         className="flex-1 flex items-center justify-center gap-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg py-2 transition text-sm font-medium"
@@ -267,7 +258,7 @@ export default function MenuManagementPage() {
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(item._id)}
+                        onClick={() => item._id && handleDelete(item._id)}
                         className="flex-1 flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg py-2 transition text-sm font-medium"
                       >
                         <Trash2 className="w-4 h-4" />
