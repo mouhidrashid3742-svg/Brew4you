@@ -12,13 +12,15 @@ const pwaOptions = withPWA({
 const nextConfig = {
   reactStrictMode: true,
   turbopack: {},
+  output: "standalone",
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com"
       }
-    ]
+    ],
+    unoptimized: true
   }
 };
 

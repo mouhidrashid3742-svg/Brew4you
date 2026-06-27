@@ -215,8 +215,8 @@ For Each Order:
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/brew4you
-ADMIN_SECRET=brew4you_secret_2024
-NEXT_PUBLIC_ADMIN_SECRET=brew4you_secret_2024
+ADMIN_SECRET=<ADMIN_SECRET>
+NEXT_PUBLIC_ADMIN_SECRET=<ADMIN_SECRET>
 NEXT_PUBLIC_WHATSAPP=923000000000
 NEXT_PUBLIC_PHONE=+923000000000
 NEXT_PUBLIC_SITE_URL=http://localhost:3001
@@ -438,7 +438,7 @@ const res = await fetch("/api/products", {
 
 1. **Start using the admin panel**
    - Login: http://localhost:3001/admin/login
-   - Password: `brew4you_secret_2024`
+   - Password: `<ADMIN_SECRET>`
 
 2. **Test all features locally**
    - Add menu items
@@ -455,3 +455,4 @@ const res = await fetch("/api/products", {
 ---
 
 **Everything is working perfectly! Your BREW4YOU admin system is complete! ☕✨**
+

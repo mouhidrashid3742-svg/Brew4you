@@ -39,7 +39,7 @@ export default function BlogManagement() {
     content: "",
     category: CATEGORIES[0],
     image: "",
-    author: "Brew4You Team",
+    author: "9 BAR Team",
     published: false
   });
 
@@ -175,7 +175,7 @@ export default function BlogManagement() {
       content: "",
       category: CATEGORIES[0],
       image: "",
-      author: "Brew4You Team",
+      author: "9 BAR Team",
       published: false
     });
     setPreviewImage("");

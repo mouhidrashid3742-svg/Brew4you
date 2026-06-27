@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     // In production:
-    // await sendSMS(phone, `Your Brew4You OTP is: ${otp}. Valid for 5 minutes.`);
+    // await sendSMS(phone, `Your 9 BAR OTP is: ${otp}. Valid for 5 minutes.`);
     
     // Store OTP in cache with 5-minute expiry
     // For demo, we'll just return it

@@ -23,7 +23,7 @@ export default function ProductCard({ name, description, price, image, popular, 
   const handleOrder = (event: React.MouseEvent) => {
     event.stopPropagation();
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000";
-    const message = encodeURIComponent(`Hi Brew4You! I'd like to order:\n\n📍 ${name}\nPrice: PKR ${price}\n\nPlease confirm availability and delivery time.`);
+    const message = encodeURIComponent(`Hi 9 BAR! I'd like to order:\n\n📍 ${name}\nPrice: PKR ${price}\n\nPlease confirm availability and delivery time.`);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
     window.open(whatsappUrl, "_blank");
   };

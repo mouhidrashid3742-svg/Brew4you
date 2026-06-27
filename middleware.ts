@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
-    const cookie = request.cookies.get("brew4you_admin");
+    const cookie = request.cookies.get("ninebar_admin");
     if (!cookie || cookie.value !== "true") {
       const loginUrl = request.nextUrl.clone();
       loginUrl.pathname = "/admin/login";

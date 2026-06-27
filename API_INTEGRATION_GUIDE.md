@@ -186,7 +186,7 @@ Response:
 ```bash
 curl -X POST http://localhost:3000/api/loyalty \
   -H "Content-Type: application/json" \
-  -H "x-admin-secret: brew4you_secret_2024" \
+  -H "x-admin-secret: <ADMIN_SECRET>" \
   -d '{
     "userId": "user_id_123",
     "orderId": "ORD-1705276800000-a1b2c3d4",
@@ -299,7 +299,7 @@ curl -X DELETE http://localhost:3000/api/subscriptions \
 
 ```env
 MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net
-ADMIN_SECRET=brew4you_secret_2024
+ADMIN_SECRET=<ADMIN_SECRET>
 ```
 
 ## Error Handling
@@ -344,3 +344,4 @@ Recommended rate limits:
 - **Demo OTP**: Any 6-digit code
 - **Demo Phone**: Any valid Pakistan phone format
 - **Demo User**: Auto-created on first OTP verification
+

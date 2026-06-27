@@ -83,7 +83,7 @@ export default function SettingsManagement() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Business Settings</h1>
-        <p className="mt-2 text-ink-light">Configure your Brew4You business details</p>
+        <p className="mt-2 text-ink-light">Configure your 9 BAR business details</p>
       </div>
 
       <div className="space-y-6 rounded-xl border border-gold/20 bg-ink/50 p-6">
@@ -153,7 +153,7 @@ export default function SettingsManagement() {
                 type="email"
                 value={settings.businessEmail}
                 onChange={(e) => setSettings({ ...settings, businessEmail: e.target.value })}
-                placeholder="contact@brew4you.com"
+                placeholder="contact@9bar.coffee"
                 className="mt-1"
               />
             </div>

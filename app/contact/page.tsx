@@ -41,9 +41,9 @@ export default function ContactPage() {
       <section className="grid gap-12 lg:grid-cols-[0.95fr_0.75fr] lg:items-start">
         <div className="space-y-6">
           <p className="text-sm uppercase tracking-[0.3em] text-gold">Contact</p>
-          <h1 className="text-4xl font-semibold sm:text-5xl">Reach Brew4You for orders, feedback, or collaborations.</h1>
+          <h1 className="text-4xl font-semibold sm:text-5xl">Reach 9 BAR for orders, feedback, or collaborations.</h1>
           <p className="max-w-3xl leading-8 text-ink/75">
-            Visit our premium cloud café hub in Eden Valley, Faisalabad. Use the form to message us directly and we will respond quickly.
+            Visit our boutique coffee studio in Eden Valley, Faisalabad. Send us a message and our team will respond promptly.
           </p>
 
           <div className="space-y-4 rounded-[32px] border border-white/10 bg-[#111111]/70 p-8">
@@ -52,7 +52,7 @@ export default function ContactPage() {
             <p className="text-lg font-semibold">Address</p>
             <p className="text-sm text-ink/70">Eden Valley, Faisalabad</p>
             <p className="text-lg font-semibold">Email</p>
-            <p className="text-sm text-ink/70">hello@brew4you.com</p>
+            <p className="text-sm text-ink/70">hello@9bar.coffee</p>
             <p className="text-lg font-semibold">Phone</p>
             <p className="text-sm text-ink/70">+92 300 0000000</p>
           </div>
@@ -70,7 +70,7 @@ export default function ContactPage() {
             <iframe
               className="h-full w-full"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13619.57732766101!2d73.05066438817173!3d31.428444887186446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391901a186043323%3A0xef6938f17f0e4838!2sEden%20Valley%2C%20Faisalabad!5e0!3m2!1sen!2s!4v1710000000000"
-              title="Brew4You location"
+              title="9 BAR location"
               loading="lazy"
             />
           </div>

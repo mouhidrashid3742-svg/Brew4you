@@ -15,7 +15,7 @@ export function isAdmin(): boolean {
   if (typeof document === "undefined") return false;
   const cookie = document.cookie
     .split("; ")
-    .find((row) => row.startsWith("brew4you_admin="));
+    .find((row) => row.startsWith("ninebar_admin="));
   return !!cookie;
 }
 

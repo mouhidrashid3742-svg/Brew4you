@@ -78,7 +78,7 @@ ${order.notes ? `📝 *Notes:* ${order.notes}` : ""}
 // Send Email notification to admin
 async function sendEmailNotification(order: OrderNotification) {
   try {
-    const adminEmail = process.env.ADMIN_EMAIL || "admin@brew4you.com";
+    const adminEmail = process.env.ADMIN_EMAIL || "admin@9bar.coffee";
     const itemsList = order.items.map((item) => `<li>${item.name} x${item.quantity} - PKR ${item.subtotal}</li>`).join("");
 
     const emailBody = `
@@ -136,7 +136,7 @@ async function sendEmailNotification(order: OrderNotification) {
     </div>
 
     <div style="text-align: center; margin-top: 20px;">
-      <a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://brew4you.vercel.app"}/admin/orders" class="button">View Order Details</a>
+      <a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://9bar.coffee"}/admin/orders" class="button">View Order Details</a>
     </div>
   </div>
 </body>
@@ -159,7 +159,7 @@ async function sendEmailNotification(order: OrderNotification) {
         });
 
         await transporter.sendMail({
-          from: process.env.SMTP_FROM || "orders@brew4you.com",
+          from: process.env.SMTP_FROM || "orders@9bar.coffee",
           to: adminEmail,
           subject: `🎉 New Order Received - ${order.orderId}`,
           html: emailBody

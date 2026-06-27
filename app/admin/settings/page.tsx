@@ -10,7 +10,7 @@ export default function SettingsPage() {
       <main className="ml-64 p-8">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Business Settings</h1>
-          <p className="text-white/60 mb-8">Configure your Brew4You business details</p>
+          <p className="text-white/60 mb-8">Configure your 9 BAR business details</p>
           <SettingsManagement />
         </div>
       </main>

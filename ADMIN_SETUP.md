@@ -21,7 +21,7 @@ ADMIN_SECRET=MySecurePassword123!@#
 
 ⚠️ **IMPORTANT:** 
 - This is the password staff uses to log in
-- Change it from default `brew4you_secret_2024` before deploying
+- Change it from default `<ADMIN_SECRET>` before deploying
 - Use a strong password
 - Only you should know this
 
@@ -76,7 +76,7 @@ npm run dev
 http://localhost:3000/admin/login
 
 # 3. Login with password:
-brew4you_secret_2024
+<ADMIN_SECRET>
 
 # 4. Click "Menu Management"
 
@@ -363,3 +363,4 @@ I've created several guides for you:
 ---
 
 **Admin Dashboard Implementation Complete! 🎉**
+

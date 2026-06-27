@@ -39,7 +39,7 @@ export default function BlogPage() {
         <p className="text-sm uppercase tracking-[0.3em] text-gold">Insights</p>
         <h1 className="text-4xl font-semibold sm:text-5xl">Expert articles for better coffee moments.</h1>
         <p className="mx-auto max-w-3xl leading-8 text-ink/75">
-          Read premium guides on brewing, beans, and the differences between your favorite drinks.
+          Read premium guides on brewing, beans, and the differences between your favorite drinks at 9 BAR.
         </p>
       </section>
 

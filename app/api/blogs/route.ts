@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     content,
     category,
     image,
-    author: author || "Brew4You Team",
+    author: author || "9 BAR Team",
     published: published || false,
     publishedAt: published ? new Date() : null
   });

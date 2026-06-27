@@ -13,7 +13,7 @@ export default function HeroSection() {
           <p className="mb-4 text-sm uppercase tracking-[0.35em] text-gold/90">Luxury coffee delivery</p>
           <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">Premium Coffee Crafted For You</h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-ink/80 sm:text-xl">
-            Brew4You is a cloud café built for modern coffee lovers. Rich blends, fast delivery, and elegant presentation with every order.
+            9 BAR is a cloud café built for modern coffee lovers. Rich blends, fast delivery, and elegant presentation with every order.
           </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }} className="flex flex-col items-center justify-center gap-4 sm:flex-row">

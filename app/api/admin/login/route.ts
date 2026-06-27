@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
-  const cookie = serialize("brew4you_admin", "true", {
+  const cookie = serialize("ninebar_admin", "true", {
     httpOnly: true,
     path: "/",
     secure: process.env.NODE_ENV === "production",

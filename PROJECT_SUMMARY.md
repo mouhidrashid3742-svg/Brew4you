@@ -353,7 +353,7 @@ MONGODB_URI=mongodb+srv://...
 
 **Admin Secret**: For protected endpoints
 ```
-ADMIN_SECRET=brew4you_secret_2024
+ADMIN_SECRET=<ADMIN_SECRET>
 ```
 
 **Live API Base**: https://brew4you.vercel.app/api/
@@ -363,3 +363,4 @@ ADMIN_SECRET=brew4you_secret_2024
 **Last Updated**: January 2025
 **Status**: Production-Ready
 **Next Review**: After payment integration
+

@@ -23,7 +23,7 @@ const blogSchema = new Schema<BlogDocument>(
     content: { type: String, required: true },
     category: { type: String, required: true },
     image: { type: String, required: true },
-    author: { type: String, default: "Brew4You Team" },
+    author: { type: String, default: "9 BAR Team" },
     published: { type: Boolean, default: false },
     publishedAt: { type: Date, default: null },
     views: { type: Number, default: 0 }

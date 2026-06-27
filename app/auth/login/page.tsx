@@ -85,7 +85,7 @@ export default function LoginPage() {
         <div className="space-y-8">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Welcome to Brew4You</h1>
+            <h1 className="text-3xl font-bold">Welcome to 9 BAR</h1>
             <p className="text-ink/70">
               {step === "phone"
                 ? "Enter your phone to get started"

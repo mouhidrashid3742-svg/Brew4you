@@ -50,11 +50,11 @@ git push -u origin main
 3. Click **"Import"**
 4. Set Environment Variables:
    ```
-   MONGODB_URI = mongodb+srv://mouhidrashid3742:LuMTGA2XKqWntxIw@showroom.kc2rfgb.mongodb.net/brew4you?retryWrites=true&w=majority
+   MONGODB_URI = <YOUR_MONGODB_URI>
    
-   ADMIN_SECRET = brew4you_secret_2024
+   ADMIN_SECRET = <ADMIN_SECRET>
    
-   NEXT_PUBLIC_ADMIN_SECRET = brew4you_secret_2024
+   NEXT_PUBLIC_ADMIN_SECRET = <ADMIN_SECRET>
    
    NEXT_PUBLIC_WHATSAPP = 923000000000
    
@@ -168,7 +168,7 @@ Your `.env.local` file has these - Vercel will use them on cloud:
 ```
 Website: https://brew4you-seven.vercel.app (your actual URL)
 Admin: https://brew4you-seven.vercel.app/admin/login
-Password: brew4you_secret_2024
+Password: <ADMIN_SECRET>
 ```
 
 ### **Monitor**
@@ -218,3 +218,4 @@ Your BREW4YOU system is:
 **Questions?** Check your MongoDB Atlas dashboard or Vercel help docs.
 
 **Remember:** When you buy a domain, just add it to Vercel settings - no code changes needed!
+

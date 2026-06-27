@@ -245,7 +245,7 @@ http://localhost:3000/admin/login
 ```
 
 ### **Step 3: Login**
-- Enter password: `brew4you_secret_2024` (default)
+- Enter password: `<ADMIN_SECRET>` (default)
 - Click "Sign In"
 
 ### **Step 4: You're in the admin dashboard!**
@@ -542,3 +542,4 @@ Your non-technical staff can now manage:
 ---
 
 **Start using it now! Go to ADMIN_SETUP.md for setup instructions. 🚀**
+

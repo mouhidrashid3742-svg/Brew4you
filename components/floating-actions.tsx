@@ -2,7 +2,7 @@
 
 import { MessageCircle, Phone } from "lucide-react";
 
-const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000"}?text=${encodeURIComponent("Hi Brew4You, I'd like to place an order.")}`;
+const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000"}?text=${encodeURIComponent("Hi 9 BAR, I'd like to place an order.")}`;
 const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923000000000";
 
 export default function FloatingActions() {
@@ -13,7 +13,7 @@ export default function FloatingActions() {
         target="_blank"
         rel="noreferrer"
         className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-glow transition hover:bg-[#20BA58] hover:scale-110"
-        aria-label="Message Brew4You on WhatsApp"
+        aria-label="Message 9 BAR on WhatsApp"
         title="Order on WhatsApp"
       >
         <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ export default function FloatingActions() {
       <a
         href={`tel:${phoneNumber}`}
         className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#1d1d1d] text-gold shadow-glow transition hover:bg-[#272727] hover:scale-110"
-        aria-label="Call Brew4You"
+        aria-label="Call 9 BAR"
         title="Call us now"
       >
         <Phone className="h-6 w-6" />

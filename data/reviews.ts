@@ -2,7 +2,7 @@ export const reviews = [
   {
     name: "Ayesha K.",
     role: "Creative Director",
-    text: "Brew4You delivered the most elegant latte experience. The texture and aroma were unmatched.",
+    text: "9 BAR delivered the most elegant latte experience. The texture and aroma were unmatched.",
     rating: 5
   },
   {

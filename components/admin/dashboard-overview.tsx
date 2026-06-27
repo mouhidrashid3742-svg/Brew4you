@@ -83,7 +83,7 @@ export default function DashboardOverview() {
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold">Welcome to Admin Dashboard</h1>
-        <p className="mt-2 text-ink-light">Manage your Brew4You coffee business</p>
+        <p className="mt-2 text-ink-light">Manage your 9 BAR coffee business</p>
       </div>
 
       {/* Stats Grid */}

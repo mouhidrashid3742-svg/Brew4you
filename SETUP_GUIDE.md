@@ -131,7 +131,7 @@ Admin login available but password is in `.env.local`
 
 ### What's in `.env.local`:
 ```
-ADMIN_SECRET=brew4you_secret_2024
+ADMIN_SECRET=<ADMIN_SECRET>
 ```
 
 ### What You Need To Do:
@@ -230,7 +230,7 @@ ADMIN_SECRET=brew4you_secret_2024
 **Current Content:**
 ```env
 MONGODB_URI=mongodb://localhost:27017/brew4you
-ADMIN_SECRET=brew4you_secret_2024
+ADMIN_SECRET=<ADMIN_SECRET>
 NEXT_PUBLIC_WHATSAPP=923000000000
 NEXT_PUBLIC_PHONE=+923000000000
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
@@ -325,3 +325,4 @@ Additional: Email service, SMS, payment gateway (optional)
 ---
 
 For questions about any step, ask me directly!
+

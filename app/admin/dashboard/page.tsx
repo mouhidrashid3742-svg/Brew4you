@@ -2,7 +2,7 @@ import AdminLayout from "@/components/admin/admin-layout";
 import DashboardOverview from "@/components/admin/dashboard-overview";
 
 export const metadata = {
-  title: "Admin Dashboard | Brew4You",
+  title: "Admin Dashboard | 9 BAR",
   description: "Manage your coffee business"
 };
 

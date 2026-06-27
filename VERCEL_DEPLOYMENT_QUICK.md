@@ -61,9 +61,9 @@ Add these exactly as shown:
 
 | Key | Value |
 |-----|-------|
-| `MONGODB_URI` | `mongodb+srv://mouhidrashid3742:LuMTGA2XKqWntxIw@showroom.kc2rfgb.mongodb.net/brew4you?retryWrites=true&w=majority` |
-| `ADMIN_SECRET` | `brew4you_secret_2024` |
-| `NEXT_PUBLIC_ADMIN_SECRET` | `brew4you_secret_2024` |
+| `MONGODB_URI` | `<YOUR_MONGODB_URI>` |
+| `ADMIN_SECRET` | `<ADMIN_SECRET>` |
+| `NEXT_PUBLIC_ADMIN_SECRET` | `<ADMIN_SECRET>` |
 | `NEXT_PUBLIC_WHATSAPP` | `923000000000` |
 | `NEXT_PUBLIC_PHONE` | `+923000000000` |
 
@@ -104,7 +104,7 @@ https://brew4you-[random].vercel.app
 
 ### **Test Admin Panel**
 - Go to: `https://brew4you-[random].vercel.app/admin/login`
-- Password: `brew4you_secret_2024`
+- Password: `<ADMIN_SECRET>`
 - Try adding a new item
 - Check if it appears on the website
 
@@ -166,3 +166,4 @@ Your BREW4YOU system is going live! 🎉
 ---
 
 ### **🚀 Ready? Start with STEP 1 above!**
+

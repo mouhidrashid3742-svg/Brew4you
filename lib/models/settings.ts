@@ -22,7 +22,7 @@ export interface SettingsDocument extends Document {
 
 const settingsSchema = new Schema<SettingsDocument>(
   {
-    businessName: { type: String, default: "Brew4You" },
+    businessName: { type: String, default: "9 BAR" },
     businessPhone: { type: String, default: "" },
     businessWhatsApp: { type: String, default: "" },
     businessEmail: { type: String, default: "" },

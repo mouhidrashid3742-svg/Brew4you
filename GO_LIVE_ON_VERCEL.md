@@ -41,13 +41,13 @@
 
 ```
 MONGODB_URI
-mongodb+srv://mouhidrashid3742:LuMTGA2XKqWntxIw@showroom.kc2rfgb.mongodb.net/brew4you?retryWrites=true&w=majority
+<YOUR_MONGODB_URI>
 
 ADMIN_SECRET
-brew4you_secret_2024
+<ADMIN_SECRET>
 
 NEXT_PUBLIC_ADMIN_SECRET
-brew4you_secret_2024
+<ADMIN_SECRET>
 
 NEXT_PUBLIC_WHATSAPP
 923000000000
@@ -198,7 +198,7 @@ When deployed to Vercel:
 ### **Your Live System:**
 - Website: `https://brew4you-*.vercel.app`
 - Admin: Same URL + `/admin/login`
-- Password: `brew4you_secret_2024`
+- Password: `<ADMIN_SECRET>`
 - Database: MongoDB Atlas (secure cloud)
 
 ---
@@ -261,7 +261,7 @@ After deployment goes live:
 - [ ] Click Menu → Items load
 - [ ] Prices show in PKR
 - [ ] Go to `/admin/login`
-- [ ] Login with password: `brew4you_secret_2024`
+- [ ] Login with password: `<ADMIN_SECRET>`
 - [ ] Add a test item
 - [ ] Refresh menu page → Item appears
 - [ ] Share URL with team
@@ -299,3 +299,4 @@ Start with STEP 1 above in PowerShell!
 **Questions?** Check Vercel docs at vercel.com/docs
 
 **Enjoy your live coffee business! ☕**
+

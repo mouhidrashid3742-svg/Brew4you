@@ -1,6 +1,6 @@
 export const faqItems = [
   {
-    question: "How fast is Brew4You delivery?",
+    question: "How fast is 9 BAR delivery?",
     answer: "Our delivery window is 20-35 minutes inside Eden Valley. We use a smart routing system for reliable arrival."
   },
   {

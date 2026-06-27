@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       <div className="w-full rounded-[32px] border border-white/10 bg-[#111111]/80 p-10 shadow-glow">
         <p className="text-sm uppercase tracking-[0.3em] text-gold">Admin Access</p>
         <h1 className="mt-4 text-3xl font-semibold">Secure Dashboard Login</h1>
-        <p className="mt-3 text-ink/70">Enter your admin secret to manage products, pricing, and availability.</p>
+        <p className="mt-3 text-ink/70">Enter your admin secret to manage 9 BAR products, pricing, and availability.</p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <Input

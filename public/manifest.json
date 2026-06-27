@@ -1,7 +1,7 @@
 {
-  "name": "Brew4You",
-  "short_name": "Brew4You",
-  "description": "Luxury cloud café for premium coffee crafted for you.",
+  "name": "9 BAR",
+  "short_name": "9 BAR",
+  "description": "Premium specialty coffee crafted with precision.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

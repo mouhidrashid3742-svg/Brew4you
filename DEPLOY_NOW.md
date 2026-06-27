@@ -30,17 +30,17 @@ Click **"Environment Variables"** and add these 5:
 
 ```
 Name: MONGODB_URI
-Value: mongodb+srv://mouhidrashid3742:LuMTGA2XKqWntxIw@showroom.kc2rfgb.mongodb.net/brew4you?retryWrites=true&w=majority
+Value: <YOUR_MONGODB_URI>
 Select: Production, Preview, Development
 Click: Add
 
 Name: ADMIN_SECRET
-Value: brew4you_secret_2024
+Value: <ADMIN_SECRET>
 Select: Production, Preview, Development  
 Click: Add
 
 Name: NEXT_PUBLIC_ADMIN_SECRET
-Value: brew4you_secret_2024
+Value: <ADMIN_SECRET>
 Select: Production, Preview, Development
 Click: Add
 
@@ -67,7 +67,7 @@ Click: Add
 After deployment:
 - **Website URL:** `https://brew4you-[random].vercel.app`
 - **Admin Panel:** Same URL + `/admin/login`
-- **Password:** `brew4you_secret_2024`
+- **Password:** `<ADMIN_SECRET>`
 
 **Share this URL:** `https://brew4you-[random].vercel.app` with your team!
 
@@ -80,7 +80,7 @@ After deployment:
 3. Click **Menu** → Items from MongoDB load
 4. Prices show in **PKR**
 5. Go to `/admin/login`
-6. Enter password: `brew4you_secret_2024`
+6. Enter password: `<ADMIN_SECRET>`
 7. Click **+ Add Item** to add coffee
 8. Item appears on website instantly!
 
@@ -144,3 +144,4 @@ Your BREW4YOU system is:
 - MongoDB help: https://docs.mongodb.com/atlas/
 
 **Congratulations! Your coffee business is about to go online! ☕🌍**
+

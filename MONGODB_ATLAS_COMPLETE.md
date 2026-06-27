@@ -35,9 +35,9 @@ Your BREW4YOU system is now connected to **MongoDB Atlas** cloud database!
 
 ### **File: `.env.local`**
 ```
-MONGODB_URI=mongodb+srv://mouhidrashid3742:LuMTGA2XKqWntxIw@showroom.kc2rfgb.mongodb.net/brew4you?retryWrites=true&w=majority
-ADMIN_SECRET=brew4you_secret_2024
-NEXT_PUBLIC_ADMIN_SECRET=brew4you_secret_2024
+MONGODB_URI=<YOUR_MONGODB_URI>
+ADMIN_SECRET=<ADMIN_SECRET>
+NEXT_PUBLIC_ADMIN_SECRET=<ADMIN_SECRET>
 NEXT_PUBLIC_WHATSAPP=923000000000
 NEXT_PUBLIC_PHONE=+923000000000
 NEXT_PUBLIC_SITE_URL=http://localhost:3003
@@ -67,7 +67,7 @@ URL: http://localhost:3003/menu
 ### **✅ Admin Panel**
 ```
 URL: http://localhost:3003/admin/menu
-├─ Login: brew4you_secret_2024
+├─ Login: <ADMIN_SECRET>
 ├─ Shows all items in grid view
 ├─ Displays item status (Popular, Available)
 ├─ Can add/edit/delete items
@@ -144,7 +144,7 @@ GET /api/products
 ### **Admin Login**
 ```
 URL: http://localhost:3003/admin/login
-Password: brew4you_secret_2024
+Password: <ADMIN_SECRET>
 ```
 
 ### **Add New Item**
@@ -320,10 +320,11 @@ Everything is configured and working! Your system is:
 
 ### **Time to Use It!**
 1. Open: http://localhost:3003/admin/login
-2. Password: brew4you_secret_2024
+2. Password: <ADMIN_SECRET>
 3. Start adding menu items
 4. Watch them appear on website instantly!
 
 ---
 
 **Welcome to the cloud! ☁️ Your data is safe, your website is fast, and your business is ready to scale! 🚀**
+

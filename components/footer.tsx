@@ -17,15 +17,15 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <Image
               src="/icon.svg"
-              alt="Brew4You Logo"
+              alt="9 BAR Logo"
               width={24}
               height={24}
               className="h-6 w-6 object-contain"
             />
-            <p className="text-sm uppercase tracking-[0.22em] text-gold">Brew4You</p>
+            <p className="text-sm uppercase tracking-[0.22em] text-gold">9 BAR</p>
           </div>
           <p>Premium coffee delivery from Eden Valley, Faisalabad.</p>
-          <p className="text-ink/60">© {new Date().getFullYear()} Brew4You. Crafted for the modern coffee lover.</p>
+          <p className="text-ink/60">© {new Date().getFullYear()} 9 BAR. Crafted for the modern coffee lover.</p>
         </div>
 
         <div className="flex flex-wrap gap-4">

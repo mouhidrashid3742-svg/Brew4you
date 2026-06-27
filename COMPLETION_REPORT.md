@@ -157,8 +157,8 @@ components/admin/menu-item-form.tsx ✅ UPDATED
 ### **Environment Variables**
 ```
 ✅ MONGODB_URI=mongodb://localhost:27017/brew4you
-✅ ADMIN_SECRET=brew4you_secret_2024
-✅ NEXT_PUBLIC_ADMIN_SECRET=brew4you_secret_2024
+✅ ADMIN_SECRET=<ADMIN_SECRET>
+✅ NEXT_PUBLIC_ADMIN_SECRET=<ADMIN_SECRET>
 ✅ NEXT_PUBLIC_WHATSAPP=923000000000
 ✅ NEXT_PUBLIC_PHONE=+923000000000
 ✅ NEXT_PUBLIC_SITE_URL=http://localhost:3001
@@ -212,7 +212,7 @@ URLs:
 ### **To Use Admin Panel**
 ```
 1. Go to: http://localhost:3001/admin/login
-2. Password: brew4you_secret_2024
+2. Password: <ADMIN_SECRET>
 3. Click "Sign In"
 4. Access all admin features!
 ```
@@ -413,7 +413,8 @@ Your BREW4YOU admin system is now:
 ---
 
 **Admin URL:** http://localhost:3001/admin/login  
-**Password:** brew4you_secret_2024  
+**Password:** <ADMIN_SECRET>  
 **Status:** ✅ LIVE & WORKING  
 
 **Ready to rock! ☕✨**
+

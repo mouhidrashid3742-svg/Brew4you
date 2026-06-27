@@ -61,13 +61,13 @@ export default function Navbar() {
           <div className="relative h-10 w-10 flex-shrink-0">
             <Image
               src="/icon.svg"
-              alt="Brew4You Logo"
+              alt="9 BAR Logo"
               width={40}
               height={40}
               className="h-10 w-10 object-contain"
             />
           </div>
-          Brew4You
+          9 BAR
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -89,7 +89,7 @@ export default function Navbar() {
           <a
             href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923000000000"}`}
             className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-sm font-medium transition hover:bg-gold/20 text-gold"
-            aria-label="Call Brew4You"
+            aria-label="Call 9 BAR"
           >
             <Phone className="h-4 w-4" />
             Call
@@ -154,7 +154,7 @@ export default function Navbar() {
               <a
                 href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923000000000"}`}
                 className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-sm font-medium transition hover:bg-gold/20 text-gold"
-                aria-label="Call Brew4You"
+                aria-label="Call 9 BAR"
               >
                 <Phone className="h-4 w-4" />
                 Call

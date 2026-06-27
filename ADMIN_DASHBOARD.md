@@ -113,7 +113,7 @@ Website updates automatically! ✅
 5. Access all admin pages
 6. Click Logout to sign out
 
-**Default password:** `brew4you_secret_2024`
+**Default password:** `<ADMIN_SECRET>`
 (Change in .env.local before going live!)
 
 ---
@@ -551,3 +551,4 @@ If your team has questions about:
 ---
 
 **Admin Dashboard is COMPLETE and READY TO USE! 🚀**
+

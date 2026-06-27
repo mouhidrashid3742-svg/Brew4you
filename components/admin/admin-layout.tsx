@@ -75,18 +75,18 @@ export default function AdminLayout({ children, currentPage }: AdminLayoutProps)
             <div className="flex items-center gap-2">
               <Image
                 src="/icon.svg"
-                alt="Brew4You Logo"
+                alt="9 BAR Logo"
                 width={28}
                 height={28}
                 className="h-7 w-7 object-contain"
               />
-              <h1 className="text-xl font-bold text-gold">BREW4YOU</h1>
+              <h1 className="text-xl font-bold text-gold">9 BAR</h1>
             </div>
           )}
           {!sidebarOpen && (
             <Image
               src="/icon.svg"
-              alt="Brew4You Logo"
+              alt="9 BAR Logo"
               width={28}
               height={28}
               className="h-7 w-7 object-contain"

@@ -31,7 +31,7 @@ async function connect() {
 
   if (!cachedConnection.promise) {
     cachedConnection.promise = mongoose.connect(uri, {
-      dbName: "brew4you"
+      dbName: "9bar"
     }) as Promise<typeof mongoose>;
   }
 

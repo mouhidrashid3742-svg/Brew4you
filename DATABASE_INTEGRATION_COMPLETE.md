@@ -193,7 +193,7 @@ Mobile Responsive:    ✅ YES
 ### **For Admin Staff (Adding Items)**
 ```
 1. Go to: http://localhost:3002/admin
-2. Login with password: brew4you_secret_2024
+2. Login with password: <ADMIN_SECRET>
 3. Click "Menu Management"
 4. Click "Add New Item"
 5. Fill in: Name, Price, Category, Description
@@ -315,7 +315,7 @@ Your system is now:
 **To start using:**
 ```
 1. Open: http://localhost:3002/admin
-2. Login with: brew4you_secret_2024
+2. Login with: <ADMIN_SECRET>
 3. Add coffee items
 4. Check website: http://localhost:3002/menu
 5. Items appear instantly! ✅
@@ -343,3 +343,4 @@ Your BREW4YOU system now has:
 **Your system is 100% ready to use! 🚀**
 
 Non-technical staff can now manage the entire menu through simple buttons and forms. Changes appear on the website instantly!
+

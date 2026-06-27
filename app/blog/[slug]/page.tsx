@@ -19,7 +19,7 @@ export default function BlogPostPage({ params }: any) {
           <p>
             This premium article explores the details you need to understand how to make elegant coffee at home and choose the right drink for every occasion.
           </p>
-          <p>Enjoy insights, brewing techniques, and thoughtful recommendations tailored for Brew4You customers.</p>
+          <p>Enjoy insights, brewing techniques, and thoughtful recommendations tailored for 9 BAR customers.</p>
         </article>
       </section>
     </main>

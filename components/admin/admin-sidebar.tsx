@@ -11,7 +11,7 @@ export function AdminSidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleLogout = () => {
-    document.cookie = "brew4you_admin=; max-age=0; path=/";
+    document.cookie = "ninebar_admin=; max-age=0; path=/";
     router.push("/admin/login");
   };
 
