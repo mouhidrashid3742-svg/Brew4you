@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">9 BAR</string>
-    <string name="title_activity_main">9 BAR</string>
-    <string name="package_name">com.nineBar.coffee</string>
-    <string name="custom_url_scheme">com.nineBar.coffee</string>
-</resources>
