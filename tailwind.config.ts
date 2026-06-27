@@ -9,19 +9,36 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ["var(--font-cormorant)", "serif"],
+        body: ["var(--font-manrope)", "sans-serif"]
+      },
       colors: {
-        surface: "#0a0a0a",
-        ink: "#f8f7f3",
-        gold: "#d4af37",
-        smoke: "#272727",
-        charcoal: "#111111",
-        accent: "#f2c777"
+        coffee: {
+          cream: "#F7F2EA",
+          card: "#FFFDF9",
+          light: "#EFE4D3",
+          text: "#2A201A",
+          "text-secondary": "#5D4B3E",
+          bronze: "#B88A5A",
+          gold: "#D6B37A",
+          brown: "#6B4A32",
+          dark: "#3A2A22",
+          border: "rgba(107,74,50,0.12)"
+        }
       },
       boxShadow: {
-        glow: "0 20px 70px rgba(212, 175, 55, 0.15)"
+        luxury: "0 10px 40px rgba(107, 74, 50, 0.08)",
+        "luxury-md": "0 8px 24px rgba(107, 74, 50, 0.06)",
+        "luxury-lg": "0 20px 60px rgba(107, 74, 50, 0.1)"
       },
-      backgroundImage: {
-        hero: "radial-gradient(circle at top, rgba(212, 175, 55, 0.12), transparent 28%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08), transparent 20%)"
+      borderRadius: {
+        luxury: "18px",
+        "luxury-lg": "24px"
+      },
+      spacing: {
+        luxury: "80px",
+        "luxury-half": "40px"
       }
     }
   },
@@ -29,3 +46,4 @@ const config: Config = {
 };
 
 export default config;
+

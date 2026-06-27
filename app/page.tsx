@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import HeroSection from "@/components/hero-section";
-import ReviewsCarousel from "@/components/reviews-carousel";
-import FaqSearch from "@/components/faq-search";
-import FloatingActions from "@/components/floating-actions";
-import ScrollTop from "@/components/scroll-top";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { ArrowRight, Coffee, Leaf, Clock, Award } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface MenuItem {
   _id?: string;
@@ -21,6 +17,18 @@ interface MenuItem {
   popular?: boolean;
 }
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+const staggerContainer = {
+  initial: { opacity: 0 },
+  whileInView: { opacity: 1 },
+  transition: { staggerChildren: 0.2 }
+};
+
 export default function HomePage() {
   const [bestSellers, setBestSellers] = useState<MenuItem[]>([]);
 
@@ -30,119 +38,239 @@ export default function HomePage() {
         const res = await fetch("/api/products");
         const data = await res.json();
         const products = data.products || [];
-        setBestSellers(products.filter((item: MenuItem) => item.popular).slice(0, 4));
+        setBestSellers(products.filter((item: MenuItem) => item.popular).slice(0, 3));
       } catch (error) {
         console.error("Failed to fetch menu:", error);
       }
     };
     fetchMenu();
   }, []);
+
   return (
-    <main className="relative overflow-hidden">
-      <HeroSection />
+    <main className="min-h-screen bg-coffee-cream pt-20">
+      {/* Hero Section */}
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-coffee-bronze/5 to-coffee-gold/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-coffee-brown/5 to-coffee-bronze/5 rounded-full blur-3xl" />
+        </div>
 
-      <section className="mx-auto max-w-7xl space-y-12 px-6 py-20 sm:px-8 lg:px-10">
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-6">
-            <p className="text-sm uppercase tracking-[0.3em] text-gold">Why Choose Us</p>
-            <h2 className="text-3xl font-semibold sm:text-4xl">A minimalist experience with premium coffee values.</h2>
-            <p className="max-w-2xl leading-8 text-ink/80">
-              Brew4You blends luxury with speed. From bean selection to delivery, every step is designed for a seamless, premium journey.
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-8"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coffee-light border border-coffee-border">
+              <div className="w-2 h-2 rounded-full bg-coffee-bronze"></div>
+              <span className="text-xs font-medium text-coffee-text-secondary tracking-wider">
+                SPECIALTY COFFEE CRAFTED WITH PRECISION
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-coffee-text mb-6 leading-tight"
+          >
+            Espresso
+            <br />
+            <span className="bg-gradient-to-r from-coffee-bronze to-coffee-gold bg-clip-text text-transparent">
+              Excellence
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-lg text-coffee-text-secondary max-w-2xl mx-auto mb-12 leading-relaxed"
+          >
+            Sourced from world-class origins, extracted to perfection. At 9 bars of pressure, we deliver specialty coffee as an art form.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link href="/menu" className="luxury-button luxury-button-primary">
+              Explore Menu <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+            <button className="luxury-button luxury-button-secondary">
+              Learn More
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Drinks */}
+      <section className="luxury-section bg-coffee-light">
+        <div className="luxury-container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <span className="text-xs font-medium text-coffee-bronze tracking-widest uppercase">
+              House Specials
+            </span>
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-coffee-text mt-4 mb-4">
+              Signature Selection
+            </h2>
+            <p className="text-coffee-text-secondary max-w-2xl mx-auto">
+              Carefully curated drinks that define our commitment to excellence
             </p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                "Freshly roasted beans",
-                "Experienced baristas",
-                "Modern packaging",
-                "Fast local delivery"
-              ].map((item) => (
-                <div key={item} className="glass-card rounded-[28px] p-5">
-                  <p className="font-semibold">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#111111]/70 p-6">
-            <Image
-              src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80"
-              alt="Coffee experience"
-              width={880}
-              height={660}
-              className="h-[420px] w-full rounded-[28px] object-cover"
-            />
-          </div>
-        </div>
+          </motion.div>
 
-        <div className="space-y-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            {bestSellers.length === 0 ? (
-              <p className="text-center text-ink/70">Loading bestsellers...</p>
-            ) : (
-              bestSellers.map((item) => (
-                <div key={item._id || item.id} className="glass-card rounded-[32px] p-6">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xl font-semibold">{item.name}</p>
-                      <p className="mt-2 text-sm text-ink/70">{item.description}</p>
+          {bestSellers.length > 0 ? (
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              className="grid md:grid-cols-3 gap-8 mb-12"
+            >
+              {bestSellers.map((drink, idx) => (
+                <motion.div
+                  key={drink._id || drink.id}
+                  variants={fadeInUp}
+                  className="luxury-card p-8"
+                >
+                  {drink.image && (
+                    <div className="relative h-40 mb-6 rounded-luxury overflow-hidden">
+                      <Image
+                        src={drink.image}
+                        alt={drink.name}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <span className="text-gold">PKR {item.price}</span>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { title: "Beans", description: "Sourced from elite roasters and roasted just-in-time." },
-              { title: "Brewing", description: "Precision drip, espresso, and cold brew crafted on-demand." },
-              { title: "Delivery", description: "Brothers of speed ensure your cup arrives warm and intact." }
-            ].map((item) => (
-              <div key={item.title} className="glass-card rounded-[32px] p-6">
-                <p className="text-lg font-semibold text-gold">{item.title}</p>
-                <p className="mt-3 text-sm leading-7 text-ink/80">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {[
-            "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=900&q=80"
-          ].map((src) => (
-            <div key={src} className="relative h-72 overflow-hidden rounded-[28px] border border-white/10 bg-[#111111]/80">
-              <Image src={src} alt="Gallery image" fill className="object-cover" />
+                  )}
+                  <h3 className="font-heading text-xl font-bold text-coffee-text mb-2">
+                    {drink.name}
+                  </h3>
+                  <p className="text-coffee-text-secondary text-sm mb-6">
+                    {drink.description}
+                  </p>
+                  <p className="text-coffee-bronze font-heading text-lg font-bold">
+                    PKR {drink.price}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-coffee-text-secondary">Loading our signature drinks...</p>
             </div>
-          ))}
+          )}
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <Link href="/menu" className="luxury-button luxury-button-primary">
+              View Full Menu
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      <section className="bg-[#080808] py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <ReviewsCarousel />
+      {/* Why Choose Us */}
+      <section id="about" className="luxury-section">
+        <div className="luxury-container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <span className="text-xs font-medium text-coffee-bronze tracking-widest uppercase">
+              Our Promise
+            </span>
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-coffee-text mt-4">
+              Why 9 BAR
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            className="grid md:grid-cols-4 gap-8"
+          >
+            {[
+              {
+                icon: Coffee,
+                title: "Premium Beans",
+                description: "Single-origin, specialty-grade beans"
+              },
+              {
+                icon: Award,
+                title: "Expert Baristas",
+                description: "Precision and passion in every cup"
+              },
+              {
+                icon: Clock,
+                title: "Fresh Daily",
+                description: "Roasted fresh, served within hours"
+              },
+              {
+                icon: Leaf,
+                title: "Sustainable",
+                description: "Ethically sourced from fair-trade partners"
+              }
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  variants={fadeInUp}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-coffee-bronze/10 to-coffee-gold/10 flex items-center justify-center mx-auto mb-6">
+                    <Icon className="w-8 h-8 text-coffee-bronze" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-coffee-text mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-coffee-text-secondary text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10">
-        <FaqSearch />
-      </section>
-
-      <section className="bg-[#090909] py-20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 text-center sm:px-8 lg:px-10">
-          <p className="text-sm uppercase tracking-[0.3em] text-gold">Delivery time estimator</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Within 3–4 km of Eden Valley, expect premium delivery in under 35 minutes.</h2>
-          <p className="max-w-3xl mx-auto leading-8 text-ink/70">
-            Our optimized logistics ensure hot coffee reaches your door fresh and on time. Explore our menu and order now for the fastest cloud café experience in Faisalabad.
-          </p>
-          <Link href="/contact">
-            <Button variant="secondary">Contact Our Team</Button>
-          </Link>
+      {/* CTA Section */}
+      <section className="luxury-section bg-gradient-to-br from-coffee-dark to-coffee-brown">
+        <div className="luxury-container text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-coffee-cream mb-6">
+              Ready for Your Perfect Cup?
+            </h2>
+            <p className="text-coffee-cream/80 max-w-2xl mx-auto mb-8 text-lg">
+              Join coffee enthusiasts who've discovered true specialty coffee
+            </p>
+            <Link href="/menu" className="inline-block px-8 py-4 rounded-full bg-coffee-gold text-coffee-dark hover:bg-coffee-cream shadow-luxury hover:shadow-luxury-lg transition-all font-medium">
+              Order Now
+            </Link>
+          </motion.div>
         </div>
       </section>
-
-      <FloatingActions />
-      <ScrollTop />
     </main>
   );
 }
