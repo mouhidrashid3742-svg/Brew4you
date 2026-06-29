@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import connect from "@/lib/mongodb";
 import Product from "@/lib/models/product";
 import { menuItems } from "@/data/menu";
+import { isAdminRequest } from "@/lib/auth";
 
 const RATE_LIMIT_WINDOW = 60 * 1000;
 const MAX_REQUESTS = 120;
@@ -58,11 +59,8 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function POST(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -79,11 +77,8 @@ export async function POST(request: Request) {
   return NextResponse.json({ product }, { status: 201 });
 }
 
-export async function PUT(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function PUT(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -101,11 +96,8 @@ export async function PUT(request: Request) {
   return NextResponse.json({ product });
 }
 
-export async function DELETE(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function DELETE(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

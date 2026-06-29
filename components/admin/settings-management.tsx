@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
 import { Save } from "lucide-react";
-import { getAuthHeaders } from "@/lib/auth";
 
 interface Settings {
   _id: string;
@@ -59,7 +58,7 @@ export default function SettingsManagement() {
     try {
       const response = await fetch("/api/settings", {
         method: "PUT",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(settings)
       });
 
@@ -153,7 +152,7 @@ export default function SettingsManagement() {
                 type="email"
                 value={settings.businessEmail}
                 onChange={(e) => setSettings({ ...settings, businessEmail: e.target.value })}
-                placeholder="contact@9bar.coffee"
+                placeholder="9bar.pk@gmail.com"
                 className="mt-1"
               />
             </div>

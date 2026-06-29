@@ -87,7 +87,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923000000000"}`}
+            href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923205950705"}`}
             className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-sm font-medium transition hover:bg-gold/20 text-gold"
             aria-label="Call 9 BAR"
           >
@@ -152,7 +152,7 @@ export default function Navbar() {
             ))}
             <div className="border-t border-white/10 pt-4 flex flex-col gap-3">
               <a
-                href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923000000000"}`}
+                href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? "+923205950705"}`}
                 className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-sm font-medium transition hover:bg-gold/20 text-gold"
                 aria-label="Call 9 BAR"
               >

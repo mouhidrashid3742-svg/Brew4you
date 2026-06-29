@@ -65,18 +65,18 @@ export default function FooterLuxury() {
             <h4 className="font-heading text-sm font-bold mb-6 text-coffee-gold">Contact</h4>
             <div className="space-y-3">
               <a
-                href="tel:+923000000000"
+                href="tel:+923205950705"
                 className="flex items-center gap-3 text-sm text-coffee-cream/70 hover:text-coffee-gold transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>+92 300 000 0000</span>
+                <span>+92 320 5950705</span>
               </a>
               <a
-                href="mailto:hello@9bar.coffee"
+                href="mailto:9bar.pk@gmail.com"
                 className="flex items-center gap-3 text-sm text-coffee-cream/70 hover:text-coffee-gold transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span>hello@9bar.coffee</span>
+                <span>9bar.pk@gmail.com</span>
               </a>
               <div className="flex items-start gap-3 text-sm text-coffee-cream/70">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />

@@ -177,20 +177,6 @@ export default function CheckoutPage() {
         
         await fetch(`/api/cart?userId=${userId}`, { method: "DELETE" });
         
-        await fetch("/api/loyalty", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET || ""
-          },
-          body: JSON.stringify({
-            userId,
-            orderId: data.order.orderId,
-            pointsEarned: data.order.totalAmount,
-            transactionType: "earn",
-            description: `Order ${data.order.orderId} placed`
-          })
-        });
       } else {
         toast.error(data.error || "Failed to place order");
       }
@@ -346,7 +332,7 @@ export default function CheckoutPage() {
           >
             <p className="text-sm text-coffee-text-secondary mb-3">Share your order</p>
             <a
-              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000"}?text=${encodeURIComponent(`Hey 9 BAR! I just placed order #${orderId} for PKR ${cart.totalAmount}. Order ID: ${orderId}`)}`}
+              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705"}?text=${encodeURIComponent(`Hey 9 BAR! I just placed order #${orderId} for PKR ${cart.totalAmount}. Order ID: ${orderId}`)}`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA58] text-white px-6 py-3 rounded-luxury font-medium transition-all hover:shadow-luxury"

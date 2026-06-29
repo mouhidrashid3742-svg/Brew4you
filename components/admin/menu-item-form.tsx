@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { X, Plus, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
-import { getAuthHeaders } from "@/lib/auth";
 
 export interface MenuItem {
   _id?: string;
@@ -69,9 +68,6 @@ export function MenuItemForm({ item, onSubmit, onCancel, loading }: MenuFormProp
       try {
         const uploadRes = await fetch("/api/upload", {
           method: "POST",
-          headers: {
-            "x-admin-secret": getAuthHeaders()["x-admin-secret"]
-          },
           body: uploadFormData
         });
         const uploadData = await uploadRes.json();

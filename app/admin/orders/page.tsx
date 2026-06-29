@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, Trash2, Phone, MapPin } from "lucide-react";
-import { getAuthHeaders } from "@/lib/auth";
 
 interface OrderItem {
   name: string;
@@ -91,7 +90,7 @@ export default function OrdersPage() {
     try {
       const res = await fetch("/api/orders", {
         method: "PUT",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: orderId,
           status: newStatus
@@ -114,7 +113,7 @@ export default function OrdersPage() {
     try {
       const res = await fetch("/api/orders", {
         method: "DELETE",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: orderId })
       });
 

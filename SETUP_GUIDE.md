@@ -11,13 +11,13 @@
 
 **Current Setup:**
 ```
-NEXT_PUBLIC_PHONE=+923000000000
-NEXT_PUBLIC_WHATSAPP=923000000000
+NEXT_PUBLIC_PHONE=+923205950705
+NEXT_PUBLIC_WHATSAPP=923205950705
 ```
 
 **What You Need To Do:**
-1. Replace `923000000000` with your actual WhatsApp business number
-2. Format: Country code + Number (e.g., `+923001234567`)
+1. Verify the WhatsApp business number is `03205950705`
+2. Format: Country code + Number (e.g., `+923205950705`)
 
 **Example for Pakistan:**
 - If your number is: 0300-1234567
@@ -231,8 +231,8 @@ ADMIN_SECRET=<ADMIN_SECRET>
 ```env
 MONGODB_URI=mongodb://localhost:27017/brew4you
 ADMIN_SECRET=<ADMIN_SECRET>
-NEXT_PUBLIC_WHATSAPP=923000000000
-NEXT_PUBLIC_PHONE=+923000000000
+NEXT_PUBLIC_WHATSAPP=923205950705
+NEXT_PUBLIC_PHONE=+923205950705
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 

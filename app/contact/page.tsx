@@ -52,9 +52,9 @@ export default function ContactPage() {
             <p className="text-lg font-semibold">Address</p>
             <p className="text-sm text-ink/70">Eden Valley, Faisalabad</p>
             <p className="text-lg font-semibold">Email</p>
-            <p className="text-sm text-ink/70">hello@9bar.coffee</p>
+            <p className="text-sm text-ink/70">9bar.pk@gmail.com</p>
             <p className="text-lg font-semibold">Phone</p>
-            <p className="text-sm text-ink/70">+92 300 0000000</p>
+            <p className="text-sm text-ink/70">+92 320 5950705</p>
           </div>
         </div>
 

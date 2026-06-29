@@ -69,9 +69,6 @@ export default function MenuManagement() {
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
-        headers: {
-          "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET || ""
-        },
         body: formDataToSend
       });
 
@@ -98,19 +95,13 @@ export default function MenuManagement() {
     }
 
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const method = editingId ? "PUT" : "POST";
       const body = editingId ? { id: editingId, ...formData } : formData;
 
       const response = await fetch("/api/products", {
         method,
         headers: {
-          "Content-Type": "application/json",
-          "x-admin-secret": adminSecret || ""
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
       });
@@ -146,16 +137,10 @@ export default function MenuManagement() {
     if (!confirm("Are you sure you want to delete this item?")) return;
 
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const response = await fetch("/api/products", {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
-          "x-admin-secret": adminSecret || ""
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ id })
       });

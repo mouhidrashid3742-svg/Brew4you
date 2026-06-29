@@ -11,7 +11,7 @@ export function AdminSidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleLogout = () => {
-    document.cookie = "ninebar_admin=; max-age=0; path=/";
+    document.cookie = "adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     router.push("/admin/login");
   };
 

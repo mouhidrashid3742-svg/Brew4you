@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
 import { Edit2, Trash2, Plus, Upload, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
-import { getAuthHeaders } from "@/lib/auth";
 
 interface Blog {
   _id: string;
@@ -72,9 +71,6 @@ export default function BlogManagement() {
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
-        headers: {
-          "x-admin-secret": getAuthHeaders()["x-admin-secret"]
-        },
         body: formDataToSend
       });
 
@@ -107,7 +103,9 @@ export default function BlogManagement() {
 
       const response = await fetch("/api/blogs", {
         method,
-        headers: getAuthHeaders(),
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(body)
       });
 
@@ -143,16 +141,10 @@ export default function BlogManagement() {
     if (!confirm("Are you sure you want to delete this blog?")) return;
 
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const response = await fetch("/api/blogs", {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
-          "x-admin-secret": adminSecret || ""
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ id })
       });

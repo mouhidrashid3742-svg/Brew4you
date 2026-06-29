@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connect from '@/lib/mongodb';
 import { Order, User } from '@/lib/db-models';
 import crypto from 'crypto';
+import { isAdminRequest } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -92,17 +93,29 @@ export async function GET(req: NextRequest) {
     await connect();
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get('userId');
+    const status = searchParams.get('status') || undefined;
 
-    if (!userId) {
+    if (userId) {
+      const orders = await Order.find({ userId })
+        .sort({ createdAt: -1 })
+        .limit(50);
+
+      return NextResponse.json({ success: true, orders });
+    }
+
+    if (!isAdminRequest(req)) {
       return NextResponse.json(
-        { error: 'User ID required' },
-        { status: 400 }
+        { error: 'Unauthorized' },
+        { status: 401 }
       );
     }
 
-    const orders = await Order.find({ userId })
+    const filter: any = {};
+    if (status) filter.orderStatus = status;
+
+    const orders = await Order.find(filter)
       .sort({ createdAt: -1 })
-      .limit(50);
+      .limit(100);
 
     return NextResponse.json({ success: true, orders });
   } catch (error) {

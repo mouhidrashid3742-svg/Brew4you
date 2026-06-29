@@ -34,17 +34,8 @@ export default function OrdersManagement() {
 
   const loadOrders = async () => {
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const url = statusFilter === "all" ? "/api/orders" : `/api/orders?status=${statusFilter}`;
-      const response = await fetch(url, {
-        headers: {
-          "x-admin-secret": adminSecret || ""
-        }
-      });
+      const response = await fetch(url);
       const data = await response.json();
       setOrders(data.orders || []);
     } catch (error) {
@@ -56,16 +47,10 @@ export default function OrdersManagement() {
 
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const response = await fetch("/api/orders", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
-          "x-admin-secret": adminSecret || ""
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ id: orderId, status: newStatus })
       });
@@ -85,16 +70,10 @@ export default function OrdersManagement() {
     if (!confirm("Delete this order?")) return;
 
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const response = await fetch("/api/orders", {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
-          "x-admin-secret": adminSecret || ""
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ id: orderId })
       });

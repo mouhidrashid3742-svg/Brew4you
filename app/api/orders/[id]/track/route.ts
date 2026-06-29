@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connect from '@/lib/mongodb';
 import { Order } from '@/lib/db-models';
+import { isAdminRequest } from '@/lib/auth';
 
 export async function GET(
   req: NextRequest,
@@ -43,10 +44,7 @@ export async function PUT(
 ) {
   const { id: orderId } = await params;
   try {
-    const adminSecret = process.env.ADMIN_SECRET;
-    const authHeader = req.headers.get('x-admin-secret');
-
-    if (authHeader !== adminSecret) {
+    if (!isAdminRequest(req)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }

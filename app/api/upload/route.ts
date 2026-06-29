@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import { isAdminRequest } from "@/lib/auth";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public/uploads");
 
@@ -14,6 +15,10 @@ async function ensureUploadDir() {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isAdminRequest(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     await ensureUploadDir();
 

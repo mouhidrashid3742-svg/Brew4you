@@ -45,12 +45,12 @@ Select: Production, Preview, Development
 Click: Add
 
 Name: NEXT_PUBLIC_WHATSAPP
-Value: 923000000000
+Value: 923205950705
 Select: Production, Preview, Development
 Click: Add
 
 Name: NEXT_PUBLIC_PHONE
-Value: +923000000000
+Value: +923205950705
 Select: Production, Preview, Development
 Click: Add
 ```

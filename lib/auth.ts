@@ -1,28 +1,25 @@
-// Centralized authentication utilities
+import { verifyJwtSync } from "@/lib/jwt";
 
-export function getAdminSecret(): string {
-  return process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
+export function parseCookies(cookieHeader?: string) {
+  const cookies: Record<string, string> = {};
+  if (!cookieHeader) return cookies;
+  cookieHeader.split(";").forEach((cookie) => {
+    const [name, ...rest] = cookie.split("=");
+    if (!name || rest.length === 0) return;
+    cookies[name.trim()] = decodeURIComponent(rest.join("=").trim());
+  });
+  return cookies;
 }
 
-export function getAuthHeaders() {
-  return {
-    "Content-Type": "application/json",
-    "x-admin-secret": getAdminSecret()
-  };
+export function getAdminTokenFromRequest(request: Request) {
+  const cookieHeader = request.headers?.get("cookie") || "";
+  const cookies = parseCookies(cookieHeader);
+  return cookies.adminToken || null;
 }
 
-export function isAdmin(): boolean {
-  if (typeof document === "undefined") return false;
-  const cookie = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("ninebar_admin="));
-  return !!cookie;
-}
-
-export function getCookie(name: string): string | null {
-  if (typeof document === "undefined") return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(";").shift() ?? null;
-  return null;
+export function isAdminRequest(request: Request) {
+  const token = getAdminTokenFromRequest(request);
+  if (!token) return false;
+  const payload = verifyJwtSync(token);
+  return !!payload && payload.role === "admin";
 }

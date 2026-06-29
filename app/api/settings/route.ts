@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import connect from "@/lib/mongodb";
 import Settings from "@/lib/models/settings";
+import { isAdminRequest } from "@/lib/auth";
 
 export async function GET() {
   await connect();
@@ -14,11 +15,8 @@ export async function GET() {
   return NextResponse.json({ settings });
 }
 
-export async function PUT(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function PUT(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

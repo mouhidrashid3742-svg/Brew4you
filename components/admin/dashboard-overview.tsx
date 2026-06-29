@@ -25,26 +25,17 @@ export default function DashboardOverview() {
 
   const loadStats = async () => {
     try {
-      const adminSecret = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("adminToken="))
-        ?.split("=")[1];
-
       const [productsRes, blogsRes, ordersRes] = await Promise.all([
         fetch("/api/products"),
         fetch("/api/blogs"),
-        fetch("/api/orders?status=pending", {
-          headers: { "x-admin-secret": adminSecret || "" }
-        })
+        fetch("/api/orders?status=pending")
       ]);
 
       const products = await productsRes.json();
       const blogs = await blogsRes.json();
       const orders = await ordersRes.json();
 
-      const allOrdersRes = await fetch("/api/orders", {
-        headers: { "x-admin-secret": adminSecret || "" }
-      });
+      const allOrdersRes = await fetch("/api/orders");
       const allOrders = await allOrdersRes.json();
 
       setStats({

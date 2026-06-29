@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Edit, Trash2, Plus, Search } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { getAuthHeaders } from "@/lib/auth";
 
 
 
@@ -46,7 +45,7 @@ export default function MenuManagementPage() {
     try {
       const res = await fetch("/api/products", {
         method: "POST",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
 
@@ -71,7 +70,7 @@ export default function MenuManagementPage() {
     try {
       const res = await fetch("/api/products", {
         method: "PUT",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editingId,
           ...formData
@@ -99,7 +98,7 @@ export default function MenuManagementPage() {
     try {
       const res = await fetch("/api/products", {
         method: "DELETE",
-        headers: getAuthHeaders(),
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
       });
 

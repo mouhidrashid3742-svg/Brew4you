@@ -18,6 +18,7 @@ export default function AdminLoginPage() {
     const response = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify({ password })
     });
 
@@ -26,6 +27,22 @@ export default function AdminLoginPage() {
 
     if (response.ok) {
       toast.success(result.message);
+
+      // If running inside Capacitor, try to persist token in secure storage.
+      try {
+        // @ts-ignore - Capacitor may not be available in web environment
+        const Capacitor = (globalThis as any).Capacitor;
+        if (Capacitor && Capacitor.Plugins) {
+          const SecureStorage = Capacitor.Plugins.SecureStorage || Capacitor.Plugins.SecureStoragePlugin;
+          if (SecureStorage && result.token) {
+            await SecureStorage.set({ key: "adminToken", value: result.token });
+          }
+        }
+      } catch (e) {
+        // ignore secure storage errors
+        console.warn("Secure storage set failed", e);
+      }
+
       router.push("/admin");
     } else {
       toast.error(result.error || "Login failed.");

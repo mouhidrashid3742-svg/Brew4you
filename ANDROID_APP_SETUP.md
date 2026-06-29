@@ -97,8 +97,8 @@ Output APK location: `android/app/build/outputs/apk/`
    ADMIN_SECRET=your_secret_here
    MONGODB_URI=your_mongodb_connection
    
-   NEXT_PUBLIC_PHONE=+923000000000
-   NEXT_PUBLIC_EMAIL=hello@9bar.coffee
+   NEXT_PUBLIC_PHONE=+923205950705
+   NEXT_PUBLIC_EMAIL=9bar.pk@gmail.com
    ```
 
 ## Development & Testing

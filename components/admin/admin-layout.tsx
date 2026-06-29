@@ -14,44 +14,12 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children, currentPage }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    // Check if user is authenticated via cookie
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("adminToken="))
-      ?.split("=")[1];
-
-    if (!token) {
-      router.push("/admin/login");
-    } else {
-      setAuthenticated(true);
-      setLoading(false);
-    }
-  }, [router]);
 
   const handleLogout = () => {
     document.cookie = "adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     router.push("/admin/login");
   };
-
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-gradient-to-br from-ink via-ink/95 to-ink/90">
-        <div className="space-y-4 text-center">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-gold/30 border-t-gold mx-auto"></div>
-          <p className="text-gold">Loading admin panel...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!authenticated) {
-    return null;
-  }
 
   const navItems = [
     { href: "/admin/dashboard", icon: BarChart3, label: "Dashboard", id: "dashboard" },

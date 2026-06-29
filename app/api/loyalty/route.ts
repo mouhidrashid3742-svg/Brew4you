@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connect from '@/lib/mongodb';
 import { User, LoyaltyTransaction } from '@/lib/db-models';
+import { isAdminRequest } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
   try {
@@ -53,14 +54,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const adminSecret = process.env.ADMIN_SECRET;
-    const authHeader = req.headers.get('x-admin-secret');
-
-    if (authHeader !== adminSecret) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+    if (!isAdminRequest(req)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     await connect();

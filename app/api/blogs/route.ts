@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import connect from "@/lib/mongodb";
 import Blog from "@/lib/models/blog";
+import { isAdminRequest } from "@/lib/auth";
 
 function generateSlug(title: string): string {
   return title
@@ -28,11 +29,8 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function POST(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -67,11 +65,8 @@ export async function POST(request: Request) {
   return NextResponse.json({ blog }, { status: 201 });
 }
 
-export async function PUT(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function PUT(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -117,11 +112,8 @@ export async function PUT(request: Request) {
   return NextResponse.json({ blog });
 }
 
-export async function DELETE(request: Request) {
-  const adminSecret = process.env.ADMIN_SECRET;
-  const authHeader = request.headers.get("x-admin-secret");
-
-  if (authHeader !== adminSecret) {
+export async function DELETE(request: NextRequest) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

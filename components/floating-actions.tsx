@@ -2,8 +2,8 @@
 
 import { MessageCircle, Phone } from "lucide-react";
 
-const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923000000000"}?text=${encodeURIComponent("Hi 9 BAR, I'd like to place an order.")}`;
-const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923000000000";
+const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705"}?text=${encodeURIComponent("Hi 9 BAR, I'd like to place an order.")}`;
+const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923205950705";
 
 export default function FloatingActions() {
   return (

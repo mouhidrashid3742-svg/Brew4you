@@ -22,7 +22,7 @@ interface OrderNotification {
 // Send WhatsApp notification to admin
 async function sendWhatsAppNotification(order: OrderNotification) {
   try {
-    const adminPhone = process.env.NEXT_PUBLIC_WHATSAPP || "923000000000";
+    const adminPhone = process.env.NEXT_PUBLIC_WHATSAPP || "923205950705";
     const itemsList = order.items.map((item) => `• ${item.name} x${item.quantity}`).join("\n");
 
     const message = `
