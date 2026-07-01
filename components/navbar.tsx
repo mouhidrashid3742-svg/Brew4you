@@ -58,13 +58,12 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-3 font-heading text-xl font-semibold tracking-[0.3em] text-ink uppercase">
-          <div className="relative h-10 w-10 flex-shrink-0">
+          <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-[#111111]/80">
             <Image
-              src="/icon.svg"
+              src="/9bar.png"
               alt="9 BAR Logo"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain"
+              fill
+              className="object-contain"
             />
           </div>
           9 BAR

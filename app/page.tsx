@@ -81,15 +81,16 @@ export default function HomePage() {
                   Ritual Edition · Specialty Espresso
                 </div>
 
-                <div className="mb-8 flex flex-col items-center justify-center gap-4 rounded-[30px] border border-[#e0b77b]/20 bg-[#14110e]/80 px-6 py-5 text-center shadow-[0_28px_90px_rgba(20,17,14,0.28)] sm:flex-row sm:text-left sm:justify-start">
-                  <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border border-[#e8c493]/30 bg-[#1b1410] p-3">
-                    <Image src="/icon.svg" alt="9 BAR Logo" fill className="object-contain" />
-                  </div>
+                <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.55, ease: "easeOut" }} whileHover={{ scale: 1.01 }} className="mb-8 flex flex-col items-center justify-center gap-4 rounded-[30px] border border-[#e0b77b]/20 bg-[#14110e]/80 px-6 py-5 text-center shadow-[0_28px_90px_rgba(20,17,14,0.28)] transition-transform duration-300 sm:flex-row sm:text-left sm:justify-start">
+                  <motion.div whileHover={{ scale: 1.05 }} className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full border border-[#e8c493]/30 bg-[#1b1410] p-3 shadow-[0_0_30px_rgba(232,196,147,0.25)] transition-transform duration-300">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#f2d8a8]/30 via-transparent to-transparent" />
+                    <Image src="/9bar.png" alt="9 BAR Logo" fill className="object-contain" />
+                  </motion.div>
                   <div>
                     <p className="text-xs uppercase tracking-[0.35em] text-[#e8c493]">Signature mark</p>
                     <p className="mt-2 text-lg font-semibold text-[#fcf7ef] sm:text-xl">Where pressure becomes pleasure</p>
                   </div>
-                </div>
+                </motion.div>
 
                 <h1 className="hero-title text-balance text-4xl font-semibold leading-[0.95] text-[#fcf7ef] sm:text-5xl lg:text-7xl">
                   9 BAR is the ritual of espresso turned into art.
