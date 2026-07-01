@@ -5,6 +5,7 @@ export interface SettingsDocument extends Document {
   businessPhone: string;
   businessWhatsApp: string;
   businessEmail: string;
+  foodpandaUrl: string;
   businessAddress: string;
   deliveryFee: number;
   businessHours: {
@@ -26,6 +27,7 @@ const settingsSchema = new Schema<SettingsDocument>(
     businessPhone: { type: String, default: "" },
     businessWhatsApp: { type: String, default: "" },
     businessEmail: { type: String, default: "" },
+    foodpandaUrl: { type: String, default: "https://www.foodpanda.pk/" },
     businessAddress: { type: String, default: "" },
     deliveryFee: { type: Number, default: 0 },
     businessHours: {

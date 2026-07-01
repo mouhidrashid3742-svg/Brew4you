@@ -13,6 +13,7 @@ interface Settings {
   businessPhone: string;
   businessWhatsApp: string;
   businessEmail: string;
+  foodpandaUrl: string;
   businessAddress: string;
   deliveryFee: number;
   businessHours: {
@@ -153,6 +154,16 @@ export default function SettingsManagement() {
                 value={settings.businessEmail}
                 onChange={(e) => setSettings({ ...settings, businessEmail: e.target.value })}
                 placeholder="9bar.pk@gmail.com"
+                className="mt-1"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gold">Foodpanda Link</label>
+              <Input
+                value={settings.foodpandaUrl}
+                onChange={(e) => setSettings({ ...settings, foodpandaUrl: e.target.value })}
+                placeholder="https://www.foodpanda.pk/"
                 className="mt-1"
               />
             </div>

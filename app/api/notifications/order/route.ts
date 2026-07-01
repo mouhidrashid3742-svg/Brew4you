@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { buildWhatsAppLink } from "@/lib/communications";
+import { sendEmailMessage } from "@/lib/communications-server";
 
 interface OrderNotification {
   orderId: string;
@@ -46,23 +48,11 @@ ${order.notes ? `📝 *Notes:* ${order.notes}` : ""}
 👆 Tap the order ID to view full details
     `.trim();
 
-    // Try to use Twilio if configured and available, otherwise log for demo
-    if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN && process.env.TWILIO_WHATSAPP_NUMBER) {
-      try {
-        // @ts-ignore - optional dependency
-        const twilio = (await import("twilio")).default;
-        const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-
-        await client.messages.create({
-          from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
-          to: `whatsapp:+${adminPhone}`,
-          body: message
-        });
-      } catch (error) {
-        console.log("Twilio not installed, running in demo mode");
-      }
+    const whatsappLink = buildWhatsAppLink(adminPhone, message);
+    if (whatsappLink) {
+      console.log("📱 [WhatsApp Notification - Link Ready]");
+      console.log(whatsappLink);
     } else {
-      // Demo mode - log the message
       console.log("📱 [WhatsApp Notification - Demo Mode]");
       console.log(`To: +${adminPhone}`);
       console.log(message);
@@ -143,37 +133,13 @@ async function sendEmailNotification(order: OrderNotification) {
 </html>
     `;
 
-    // Try to send email if configured and available
-    if (process.env.SMTP_USER && process.env.SMTP_PASSWORD && process.env.SMTP_HOST) {
-      try {
-        // @ts-ignore - optional dependency
-        const nodemailer = (await import("nodemailer")).default;
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-          secure: process.env.SMTP_SECURE === "true",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASSWORD
-          }
-        });
-
-        await transporter.sendMail({
-          from: process.env.SMTP_FROM || "orders@9bar.coffee",
-          to: adminEmail,
-          subject: `🎉 New Order Received - ${order.orderId}`,
-          html: emailBody
-        });
-      } catch (error) {
-        console.log("Nodemailer not installed, running in demo mode");
-      }
-    } else {
-      // Demo mode - log the email
-      console.log("📧 [Email Notification - Demo Mode]");
-      console.log(`To: ${adminEmail}`);
-      console.log(`Subject: New Order Received - ${order.orderId}`);
-      console.log(emailBody);
-    }
+    await sendEmailMessage({
+      to: adminEmail,
+      subject: `🎉 New Order Received - ${order.orderId}`,
+      html: emailBody,
+      text: emailBody.replace(/<[^>]+>/g, " "),
+      from: process.env.SMTP_FROM || "orders@9bar.coffee"
+    });
 
     return { success: true };
   } catch (error) {

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { buildWhatsAppLink } from "@/lib/communications";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
@@ -332,7 +333,7 @@ export default function CheckoutPage() {
           >
             <p className="text-sm text-coffee-text-secondary mb-3">Share your order</p>
             <a
-              href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705"}?text=${encodeURIComponent(`Hey 9 BAR! I just placed order #${orderId} for PKR ${cart.totalAmount}. Order ID: ${orderId}`)}`}
+              href={buildWhatsAppLink(process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705", `Hey 9 BAR! I just placed order #${orderId} for PKR ${cart.totalAmount}. Order ID: ${orderId}`)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA58] text-white px-6 py-3 rounded-luxury font-medium transition-all hover:shadow-luxury"

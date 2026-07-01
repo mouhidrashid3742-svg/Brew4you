@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
+import { buildWhatsAppLink } from "@/lib/communications";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
+  const email = process.env.NEXT_PUBLIC_EMAIL ?? "9bar.pk@gmail.com";
+  const foodpandaUrl = process.env.NEXT_PUBLIC_FOODPANDA ?? "https://www.foodpanda.pk/";
+  const whatsappLink = buildWhatsAppLink(process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -52,9 +56,13 @@ export default function ContactPage() {
             <p className="text-lg font-semibold">Address</p>
             <p className="text-sm text-ink/70">Eden Valley, Faisalabad</p>
             <p className="text-lg font-semibold">Email</p>
-            <p className="text-sm text-ink/70">9bar.pk@gmail.com</p>
+            <p className="text-sm text-ink/70">{email}</p>
             <p className="text-lg font-semibold">Phone</p>
             <p className="text-sm text-ink/70">+92 320 5950705</p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href={whatsappLink} target="_blank" rel="noreferrer" className="rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white">WhatsApp</a>
+              <a href={foodpandaUrl} target="_blank" rel="noreferrer" className="rounded-full bg-[#d4af37] px-4 py-2 text-sm font-semibold text-ink">Foodpanda</a>
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ShoppingBag } from "lucide-react";
 
 const footerLinks = [
   { label: "Menu", href: "/menu" },
@@ -10,6 +10,9 @@ const footerLinks = [
 
 export default function FooterLuxury() {
   const currentYear = new Date().getFullYear();
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923205950705";
+  const email = process.env.NEXT_PUBLIC_EMAIL ?? "9bar.pk@gmail.com";
+  const foodpandaUrl = process.env.NEXT_PUBLIC_FOODPANDA ?? "https://www.foodpanda.pk/";
 
   return (
     <footer className="bg-coffee-dark text-coffee-cream pt-20 pb-8">
@@ -65,18 +68,27 @@ export default function FooterLuxury() {
             <h4 className="font-heading text-sm font-bold mb-6 text-coffee-gold">Contact</h4>
             <div className="space-y-3">
               <a
-                href="tel:+923205950705"
+                href={`tel:${phoneNumber}`}
                 className="flex items-center gap-3 text-sm text-coffee-cream/70 hover:text-coffee-gold transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>+92 320 5950705</span>
+                <span>{phoneNumber}</span>
               </a>
               <a
-                href="mailto:9bar.pk@gmail.com"
+                href={`mailto:${email}`}
                 className="flex items-center gap-3 text-sm text-coffee-cream/70 hover:text-coffee-gold transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span>9bar.pk@gmail.com</span>
+                <span>{email}</span>
+              </a>
+              <a
+                href={foodpandaUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 text-sm text-coffee-cream/70 hover:text-coffee-gold transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>Foodpanda</span>
               </a>
               <div className="flex items-start gap-3 text-sm text-coffee-cream/70">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
