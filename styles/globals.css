@@ -10,14 +10,14 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #F7F2EA;
-  color: #2A201A;
+  background-color: #f8efe4;
+  color: #2a201a;
 }
 
 body {
   min-height: 100vh;
-  background-color: #F7F2EA;
-  color: #2A201A;
+  background-color: #f8efe4;
+  color: #2a201a;
   font-family: var(--font-manrope);
   font-weight: 400;
 }
@@ -39,136 +39,143 @@ a {
 }
 
 ::selection {
-  background: rgba(184, 138, 90, 0.2);
-  color: #2A201A;
+  background: rgba(184, 138, 90, 0.24);
+  color: #2a201a;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-cormorant);
   font-weight: 600;
   line-height: 1.2;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -1px;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 600;
 }
 
 h4 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 p {
-  line-height: 1.7;
-  letter-spacing: 0.3px;
+  line-height: 1.75;
+  letter-spacing: 0.2px;
 }
 
-/* Luxury Card */
+.text-balance {
+  text-wrap: balance;
+}
+
 .luxury-card {
-  background: #FFFDF9;
+  background: #fffdf9;
   border: 1px solid rgba(107, 74, 50, 0.12);
-  border-radius: 18px;
+  border-radius: 22px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 40px rgba(107, 74, 50, 0.08);
+  box-shadow: 0 12px 40px rgba(107, 74, 50, 0.08);
 }
 
 .luxury-card:hover {
   border-color: rgba(184, 138, 90, 0.3);
-  box-shadow: 0 20px 60px rgba(107, 74, 50, 0.1);
+  box-shadow: 0 20px 60px rgba(107, 74, 50, 0.12);
   transform: translateY(-4px);
 }
 
-/* Luxury Button */
+.luxury-shell {
+  position: relative;
+  box-shadow: 0 24px 70px rgba(27, 18, 12, 0.16);
+}
+
 .luxury-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
-  border-radius: 99px;
+  padding: 14px 30px;
+  border-radius: 999px;
   font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
-  text-transform: uppercase;
-  font-size: 0.85rem;
   font-family: var(--font-manrope);
 }
 
 .luxury-button-primary {
-  background: #B88A5A;
-  color: #FFFDF9;
-  box-shadow: 0 8px 24px rgba(107, 74, 50, 0.15);
+  background: linear-gradient(135deg, #b68349 0%, #e0b77b 100%);
+  color: #fff8eb;
+  box-shadow: 0 10px 24px rgba(107, 74, 50, 0.16);
 }
 
 .luxury-button-primary:hover {
-  background: #A0774F;
-  box-shadow: 0 12px 32px rgba(107, 74, 50, 0.25);
   transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(107, 74, 50, 0.24);
 }
 
 .luxury-button-secondary {
   background: transparent;
-  color: #B88A5A;
-  border: 1.5px solid #B88A5A;
+  color: #b0743d;
+  border: 1.5px solid #c89c66;
 }
 
 .luxury-button-secondary:hover {
-  background: #B88A5A;
-  color: #FFFDF9;
+  background: #f2d8ae;
+  color: #2a201a;
 }
 
-/* Container */
 .luxury-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Section */
 .luxury-section {
   padding: 80px 20px;
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
-  
+
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
-  
+
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
-  
+
   .luxury-section {
-    padding: 40px 20px;
+    padding: 48px 20px;
   }
 }
 
-/* Smooth transitions */
 * {
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-button, a {
+button,
+a {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

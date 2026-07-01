@@ -2,10 +2,28 @@
 
 import { MessageCircle, Phone, ShoppingBag } from "lucide-react";
 import { buildWhatsAppLink } from "@/lib/communications";
+import toast from "react-hot-toast";
+import type { MouseEvent } from "react";
 
 const whatsappUrl = buildWhatsAppLink(process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705");
 const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923205950705";
 const foodpandaUrl = process.env.NEXT_PUBLIC_FOODPANDA ?? "https://www.foodpanda.pk/";
+
+const handlePhoneClick = async (event: MouseEvent<HTMLAnchorElement>) => {
+  const userAgent = typeof navigator !== "undefined" ? navigator.userAgent : "";
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+  if (!isMobile) {
+    event.preventDefault();
+
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+      toast.success("Phone number copied to clipboard");
+    } catch {
+      window.location.href = `tel:${phoneNumber}`;
+    }
+  }
+};
 
 export default function FloatingActions() {
   return (
@@ -34,6 +52,7 @@ export default function FloatingActions() {
       </a>
       <a
         href={`tel:${phoneNumber}`}
+        onClick={handlePhoneClick}
         className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#1d1d1d] text-gold shadow-glow transition hover:bg-[#272727] hover:scale-110"
         aria-label="Call 9 BAR"
         title="Call us now"

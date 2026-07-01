@@ -11,6 +11,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
   const email = process.env.NEXT_PUBLIC_EMAIL ?? "9bar.pk@gmail.com";
+  const phoneNumber = process.env.NEXT_PUBLIC_PHONE ?? "+923205950705";
   const foodpandaUrl = process.env.NEXT_PUBLIC_FOODPANDA ?? "https://www.foodpanda.pk/";
   const whatsappLink = buildWhatsAppLink(process.env.NEXT_PUBLIC_WHATSAPP ?? "923205950705");
 
@@ -58,7 +59,9 @@ export default function ContactPage() {
             <p className="text-lg font-semibold">Email</p>
             <p className="text-sm text-ink/70">{email}</p>
             <p className="text-lg font-semibold">Phone</p>
-            <p className="text-sm text-ink/70">+92 320 5950705</p>
+            <a href={`tel:${phoneNumber}`} className="text-sm text-ink/70 hover:text-gold transition">
+              {phoneNumber}
+            </a>
             <div className="flex flex-wrap gap-3 pt-2">
               <a href={whatsappLink} target="_blank" rel="noreferrer" className="rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white">WhatsApp</a>
               <a href={foodpandaUrl} target="_blank" rel="noreferrer" className="rounded-full bg-[#d4af37] px-4 py-2 text-sm font-semibold text-ink">Foodpanda</a>

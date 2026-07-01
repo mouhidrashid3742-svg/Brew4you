@@ -9,6 +9,8 @@ yarn-debug.log*
 yarn-error.log*
 coverage
 .vercel
+build.log
+tsconfig.tsbuildinfo
 
 # Android native project
 android/

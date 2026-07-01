@@ -14,14 +14,26 @@ async function ensureUploadDir() {
   }
 }
 
+// Cloudinary optional support
+let cloudinary: any = null;
+if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+  // lazy require
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const cld = require('cloudinary');
+  cloudinary = cld.v2;
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+}
+
 export async function POST(request: NextRequest) {
   if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    await ensureUploadDir();
-
     const formData = await request.formData();
     const file = formData.get("file") as File;
 
@@ -39,28 +51,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File size must be less than 5MB" }, { status: 400 });
     }
 
-    // Generate unique filename
+    // If Cloudinary is configured, upload there
+    if (cloudinary) {
+      const arrayBuffer = await file.arrayBuffer();
+      const base64 = Buffer.from(arrayBuffer).toString('base64');
+      const dataUri = `data:${file.type};base64,${base64}`;
+      const result = await cloudinary.uploader.upload(dataUri, { folder: 'brew4you' });
+      return NextResponse.json({ success: true, url: result.secure_url, filename: result.public_id }, { status: 201 });
+    }
+
+    // Fallback to saving in public/uploads
+    await ensureUploadDir();
     const timestamp = Date.now();
     const random = Math.random().toString(36).substring(7);
-    const ext = file.name.split(".").pop();
+    const ext = (file.name || 'img').split('.').pop();
     const filename = `${timestamp}-${random}.${ext}`;
-
-    // Save file
     const filePath = path.join(UPLOAD_DIR, filename);
     const bytes = await file.arrayBuffer();
     await fs.writeFile(filePath, Buffer.from(bytes));
-
-    // Return relative path for use in URLs
     const url = `/uploads/${filename}`;
 
-    return NextResponse.json(
-      {
-        success: true,
-        url,
-        filename
-      },
-      { status: 201 }
-    );
+    return NextResponse.json({ success: true, url, filename }, { status: 201 });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });

@@ -3,6 +3,7 @@ import connect from "@/lib/mongodb";
 import Product from "@/lib/models/product";
 import { menuItems } from "@/data/menu";
 import { isAdminRequest } from "@/lib/auth";
+import { commitFile } from "@/lib/github";
 
 const RATE_LIMIT_WINDOW = 60 * 1000;
 const MAX_REQUESTS = 120;
@@ -74,6 +75,15 @@ export async function POST(request: NextRequest) {
   await connect();
 
   const product = await Product.create({ name, category, description, price, image, popular, available, intensity });
+
+  // Try to commit updated menu JSON to repo (optional - requires GITHUB_TOKEN & GITHUB_REPO)
+  try {
+    const all = await Product.find({}).lean();
+    const json = JSON.stringify(all.map(p => ({ _id: p._id, name: p.name, category: p.category, price: p.price, description: p.description, image: p.image, popular: p.popular, available: p.available, intensity: p.intensity })), null, 2);
+    await commitFile('data/menu.json', json, `chore: update menu (added ${product.name})`);
+  } catch (err) {
+    console.warn('Commit to repo skipped or failed:', err);
+  }
   return NextResponse.json({ product }, { status: 201 });
 }
 
@@ -93,6 +103,15 @@ export async function PUT(request: NextRequest) {
 
   const product = await Product.findByIdAndUpdate(id, updateData, { new: true });
   if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
+
+  // commit updated menu
+  try {
+    const all = await Product.find({}).lean();
+    const json = JSON.stringify(all.map(p => ({ _id: p._id, name: p.name, category: p.category, price: p.price, description: p.description, image: p.image, popular: p.popular, available: p.available, intensity: p.intensity })), null, 2);
+    await commitFile('data/menu.json', json, `chore: update menu (edited ${product.name})`);
+  } catch (err) {
+    console.warn('Commit to repo skipped or failed:', err);
+  }
   return NextResponse.json({ product });
 }
 
@@ -111,5 +130,14 @@ export async function DELETE(request: NextRequest) {
 
   const deleted = await Product.findByIdAndDelete(body.id);
   if (!deleted) return NextResponse.json({ error: "Product not found" }, { status: 404 });
+
+  // commit updated menu
+  try {
+    const all = await Product.find({}).lean();
+    const json = JSON.stringify(all.map(p => ({ _id: p._id, name: p.name, category: p.category, price: p.price, description: p.description, image: p.image, popular: p.popular, available: p.available, intensity: p.intensity })), null, 2);
+    await commitFile('data/menu.json', json, `chore: update menu (deleted ${deleted.name})`);
+  } catch (err) {
+    console.warn('Commit to repo skipped or failed:', err);
+  }
   return NextResponse.json({ success: true });
 }

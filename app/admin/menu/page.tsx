@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { MenuItemForm } from "@/components/admin/menu-item-form";
 import type { MenuItem } from "@/components/admin/menu-item-form";
 import { Button } from "@/components/ui/button";
-import { Edit, Trash2, Plus, Search } from "lucide-react";
+import { Edit, Trash2, Plus, Search, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
@@ -120,18 +121,22 @@ export default function MenuManagementPage() {
 
   if (showForm) {
     return (
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(184,138,90,0.14),transparent_34%),linear-gradient(135deg,#f8efe4_0%,#f1e3ce_100%)]">
         <AdminSidebar />
         <main className="ml-64">
-          <div className="p-8">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-white mb-2">
+          <div className="p-6 lg:p-8">
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8 rounded-[30px] border border-[#e6d3bd] bg-[#fffdf9]/90 p-8 shadow-[0_20px_70px_rgba(98,66,38,0.08)]">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d6ab79]/30 bg-[#f7e4c7] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#b0743d]">
+                <Sparkles className="h-3.5 w-3.5" />
+                Menu Studio
+              </div>
+              <h1 className="text-3xl font-semibold text-[#24150d] mb-2">
                 {editingId ? "Edit Menu Item" : "Add New Menu Item"}
               </h1>
-              <p className="text-white/60">
+              <p className="text-[#6f5846]">
                 {editingId ? "Update the item details below" : "Fill in the details to add a new product"}
               </p>
-            </div>
+            </motion.div>
             <MenuItemForm
               item={editingId ? items.find(i => i._id === editingId) : undefined}
               onSubmit={editingId ? handleUpdate : handleAdd}
@@ -148,40 +153,41 @@ export default function MenuManagementPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(184,138,90,0.14),transparent_34%),linear-gradient(135deg,#f8efe4_0%,#f1e3ce_100%)]">
       <AdminSidebar />
-      
-      <main className="ml-64">
-        <div className="p-8">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Menu Management</h1>
-              <p className="text-white/60">Manage your menu items, prices, and availability</p>
-            </div>
-            <Button
-              onClick={() => setShowForm(true)}
-              className="bg-gold hover:bg-gold/90 text-black font-semibold"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add New Item
-            </Button>
-          </div>
 
-          {/* Search & Filter */}
-          <div className="flex gap-4 mb-6">
+      <main className="ml-64">
+        <div className="p-6 lg:p-8">
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-8 rounded-[30px] border border-[#e6d3bd] bg-[#fffdf9]/90 p-8 shadow-[0_20px_70px_rgba(98,66,38,0.08)]">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d6ab79]/30 bg-[#f7e4c7] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#b0743d]">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Menu Studio
+                </div>
+                <h1 className="text-3xl font-semibold text-[#24150d] mb-2">Menu Management</h1>
+                <p className="text-[#6f5846]">Manage your menu items, prices, and availability from a refined control panel.</p>
+              </div>
+              <Button onClick={() => setShowForm(true)} className="rounded-full bg-[linear-gradient(135deg,#b68349_0%,#e0b77b_100%)] text-[#fff8eb] hover:brightness-105">
+                <Plus className="mr-2 h-4 w-4" />
+                Add New Item
+              </Button>
+            </div>
+          </motion.div>
+
+          <div className="mb-6 flex flex-col gap-4 lg:flex-row">
             <div className="flex-1">
               <Input
                 placeholder="Search items..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-white/5 border-white/10 text-white placeholder:text-white/50"
+                className="border-[#e6d3bd] bg-[#fffdf9]/80 text-[#24150d] placeholder:text-[#8b6b4f]"
               />
             </div>
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="bg-white/5 border border-white/10 text-white rounded-lg px-4 py-2 focus:outline-none focus:border-gold"
+              className="rounded-2xl border border-[#e6d3bd] bg-[#fffdf9]/80 px-4 py-2 text-[#24150d] focus:border-[#b0743d] focus:outline-none"
             >
               {CATEGORIES.map(cat => (
                 <option key={cat} value={cat} className="bg-black">
@@ -193,15 +199,15 @@ export default function MenuManagementPage() {
 
           {/* Items Grid */}
           {loading ? (
-            <div className="text-center py-12">
-              <p className="text-white/60">Loading items...</p>
+            <div className="rounded-[24px] border border-[#e6d3bd] bg-[#fffdf9]/90 py-12 text-center text-[#6f5846]">
+              <p>Loading items...</p>
             </div>
           ) : filteredItems.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-white/60 mb-6">No items found</p>
+            <div className="rounded-[24px] border border-[#e6d3bd] bg-[#fffdf9]/90 py-12 text-center text-[#6f5846]">
+              <p className="mb-6">No items found</p>
               <Button
                 onClick={() => setShowForm(true)}
-                className="bg-gold hover:bg-gold/90 text-black font-semibold"
+                className="rounded-full bg-[linear-gradient(135deg,#b68349_0%,#e0b77b_100%)] text-[#fff8eb]"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add First Item
@@ -210,7 +216,7 @@ export default function MenuManagementPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredItems.map(item => (
-                <div key={item._id} className="bg-[#111111] border border-white/10 rounded-2xl overflow-hidden hover:border-gold/50 transition group">
+                <motion.div key={item._id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="overflow-hidden rounded-[24px] border border-[#ebdcc8] bg-[#fffdf9]/90 shadow-[0_20px_60px_rgba(98,66,38,0.08)] transition group hover:-translate-y-1 hover:border-[#b0743d]/40">
                   {/* Image */}
                   <div className="relative w-full h-40 bg-black overflow-hidden">
                     <Image
@@ -220,10 +226,10 @@ export default function MenuManagementPage() {
                       className="object-cover group-hover:scale-110 transition duration-300"
                     />
                     <div className="absolute top-2 right-2 flex gap-2">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${item.popular ? 'bg-gold/20 text-gold' : 'bg-white/10 text-white/70'}`}>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${item.popular ? 'bg-[#f7e4c7] text-[#85522c]' : 'bg-[#f5efe7] text-[#6f5846]'}`}>
                         {item.popular ? '⭐ Popular' : 'Regular'}
                       </span>
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${item.available ? 'bg-green-400/20 text-green-400' : 'bg-red-400/20 text-red-400'}`}>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${item.available ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
                         {item.available ? 'Available' : 'Hidden'}
                       </span>
                     </div>
@@ -231,41 +237,40 @@ export default function MenuManagementPage() {
 
                   {/* Content */}
                   <div className="p-4">
-                    <div className="flex items-start justify-between mb-2">
+                    <div className="mb-2 flex items-start justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold text-white">{item.name}</h3>
-                        <p className="text-xs text-white/60">{item.category}</p>
+                        <h3 className="text-lg font-semibold text-[#24150d]">{item.name}</h3>
+                        <p className="text-xs text-[#8b6b4f]">{item.category}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-gold font-bold text-lg">PKR {item.price}</p>
-                        <p className="text-xs text-white/60">Level {item.intensity}/5</p>
+                        <p className="text-lg font-semibold text-[#b0743d]">PKR {item.price}</p>
+                        <p className="text-xs text-[#8b6b4f]">Level {item.intensity}/5</p>
                       </div>
                     </div>
 
-                    <p className="text-sm text-white/70 mb-4 line-clamp-2">{item.description}</p>
+                    <p className="mb-4 line-clamp-2 text-sm text-[#6f5846]">{item.description}</p>
 
-                    {/* Actions */}
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
                           setEditingId(item._id ?? null);
                           setShowForm(true);
                         }}
-                        className="flex-1 flex items-center justify-center gap-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg py-2 transition text-sm font-medium"
+                        className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#d6ab79]/30 bg-[#f7e4c7] py-2 text-sm font-medium text-[#85522c] transition hover:bg-[#e9c997]"
                       >
-                        <Edit className="w-4 h-4" />
+                        <Edit className="h-4 w-4" />
                         Edit
                       </button>
                       <button
                         onClick={() => item._id && handleDelete(item._id)}
-                        className="flex-1 flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg py-2 transition text-sm font-medium"
+                        className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-rose-500/90 py-2 text-sm font-medium text-white transition hover:bg-rose-600"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="h-4 w-4" />
                         Delete
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
