@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingCart, User } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -56,8 +57,8 @@ export default function NavbarLuxury() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#b68349_0%,#e0b77b_100%)] shadow-[0_10px_30px_rgba(182,131,73,0.24)]">
-            <span className="text-lg font-semibold text-[#fff8eb]">9</span>
+          <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden rounded-2xl bg-[#fff8eb]/10 shadow-[0_10px_30px_rgba(182,131,73,0.24)]">
+            <Image src="/9bar.png" alt="9 BAR Logo" fill className="object-contain" />
           </div>
           <div className="hidden sm:block">
             <h1 className="text-lg font-semibold tracking-[0.24em] text-[#2b2019]">9 BAR</h1>
@@ -136,6 +137,15 @@ export default function NavbarLuxury() {
           transition={{ duration: 0.3 }}
           className="border-t border-[#e6d3bd] bg-[#f4e8da] lg:hidden"
         >
+          <div className="flex items-center gap-3 border-b border-[#e6d3bd] px-4 py-4 sm:px-6">
+            <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-2xl bg-[#fff8eb]/10 shadow-[0_10px_30px_rgba(182,131,73,0.24)]">
+              <Image src="/9bar.png" alt="9 BAR Logo" fill className="object-contain" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[#2b2019]">9 BAR</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-[#8b6b4f]">Specialty Coffee</p>
+            </div>
+          </div>
           <div className="space-y-4 px-4 py-6 sm:px-6">
             {navItems.map((item) => (
               <Link
